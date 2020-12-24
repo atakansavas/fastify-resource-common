@@ -3,7 +3,7 @@ const { frError, ErrorCodes } = require('../../error/frError');
 const moment = require('moment');
 const { ObjectId } = require('mongodb');
 
-const frRepo = {
+const FrRepo = {
   //* Creates given document
   create: async (db, collection, document, userId) => {
     const unix = moment().unix();
@@ -149,4 +149,4 @@ const frRepo = {
   },
 };
 
-module.exports = frRepo;
+module.exports = FrRepo;

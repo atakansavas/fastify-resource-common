@@ -3,7 +3,7 @@ const Validator = require('../../helpers/validationHelper');
 const Utilities = require('../../helpers/utilities');
 const { frError, ErrorCodes } = require('../../error/frError');
 
-const frService = {
+const FrService = {
   read: async ({ db, id = null, tableName = null, user = null } = {}) => {
     let where = { _id: id };
 
@@ -208,4 +208,4 @@ const frService = {
   },
 };
 
-module.exports = frService;
+module.exports = FrService;
