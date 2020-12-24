@@ -1,14 +1,18 @@
 {
-  "name": "fastify-resource-common",
+  "name": "@atakansavas/fastify-resource-common",
   "version": "1.0.0",
   "description": "nodejs fastify api resource api common",
   "main": "index.js",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@atakansavas"
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atakansavas/fastify-resource-common.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "npm publish"
+    "deploy": "npm publish"
   },
   "author": "atakan savas",
   "license": "ISC"
