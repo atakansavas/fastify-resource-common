@@ -1,6 +1,6 @@
 {
   "name": "@atakansavas/fastify-resource-common",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "nodejs fastify api resource api common",
   "main": "index.js",
   "publishConfig": {
@@ -15,5 +15,10 @@
     "deploy": "npm publish"
   },
   "author": "atakan savas",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "moment": "^2.29.1",
+    "mongodb": "^3.6.3"
+  }
 }

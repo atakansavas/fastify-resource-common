@@ -1,37 +1,31 @@
-const GenericHelpers = require('../helpers/helpers');
-const AuthFunctions = require('../services/auth/auth');
+const Utilities = require('../../helpers/utilities');
+const statusCodes = require('./statusCodes');
 
-const STATUS_CODE_MAPPING = {
-  CREATE: 201,
-  READ: 200,
-  QUERY: 200,
-  UPDATE: 200,
-  DELETE: 204,
-  DISTINCT: 200,
-};
-
-module.exports = class GenericKuryemApi {
-  constructor(fastify, opts, routePrefix, methods, tableName, service) {
+module.exports = class FrApi {
+  constructor(
+    fastify,
+    opts,
+    routePrefix,
+    methods,
+    tableName,
+    service,
+    authMethod
+  ) {
     this.fastify = fastify;
     this.opts = opts;
     this.routePrefix = '' + routePrefix;
     this.methods = methods;
     this.tableName = tableName;
-    this.service = service || 'atakan';
+    this.service = service || 'fr';
   }
 
   generateUrls() {
-    let deleteUrl = this.routePrefix + '/:resourceId';
-    let readUrl = this.routePrefix + '/:resourceId';
-    let updateUrl = this.routePrefix + '/:resourceId';
-    let createUrl = this.routePrefix;
-    let queryUrl = this.routePrefix + '/_query';
     return {
-      read: readUrl,
-      create: createUrl,
-      update: updateUrl,
-      delete: deleteUrl,
-      query: queryUrl,
+      read: this.routePrefix + '/:resourceId',
+      create: this.routePrefix,
+      update: this.routePrefix + '/:resourceId',
+      delete: this.routePrefix + '/:resourceId',
+      query: this.routePrefix + '/_query',
     };
   }
 
@@ -52,6 +46,9 @@ module.exports = class GenericKuryemApi {
     afterDelete = [],
     readFormatters = [],
   } = {}) {
+    if (this.service == 'fr') {
+    }
+
     const urls = this.generateUrls();
 
     console.info('Resource initialized on', Object.values(urls));
@@ -92,14 +89,14 @@ module.exports = class GenericKuryemApi {
 
           let _response = [];
           for (let document of result.items) {
-            let _document = GenericHelpers.runReadFormatter(
+            let _document = Utilities.runReadFormatter(
               readFormatters,
               document
             );
             _response.push(_document);
           }
 
-          reply.code(STATUS_CODE_MAPPING.QUERY).send({
+          reply.code(statusCodes.QUERY).send({
             items: _response,
             totalCount: result.count,
           });
@@ -136,14 +133,11 @@ module.exports = class GenericKuryemApi {
             user: user,
           });
 
-          document = await GenericHelpers.runReadFormatter(
-            readFormatters,
-            document
-          );
+          document = await Utilities.runReadFormatter(readFormatters, document);
 
-          document = GenericHelpers.hideSystemProps(document);
+          // document = Utilities.hideSystemProps(document);
 
-          reply.code(STATUS_CODE_MAPPING.READ).send(document);
+          reply.code(statusCodes.READ).send(document);
         }
       );
     }
@@ -179,12 +173,9 @@ module.exports = class GenericKuryemApi {
             tableName: this.tableName,
             user,
           });
-          document = await GenericHelpers.runReadFormatter(
-            readFormatters,
-            document
-          );
+          document = await Utilities.runReadFormatter(readFormatters, document);
 
-          reply.code(STATUS_CODE_MAPPING.CREATE).send(document);
+          reply.code(statusCodes.CREATE).send(document);
         }
       );
     }
@@ -224,12 +215,9 @@ module.exports = class GenericKuryemApi {
             user: user,
           });
 
-          document = await GenericHelpers.runReadFormatter(
-            readFormatters,
-            document
-          );
+          document = await Utilities.runReadFormatter(readFormatters, document);
 
-          reply.code(STATUS_CODE_MAPPING.UPDATE).send(document);
+          reply.code(statusCodes.UPDATE).send(document);
         }
       );
     }
@@ -261,7 +249,7 @@ module.exports = class GenericKuryemApi {
             user: user,
           });
 
-          reply.code(STATUS_CODE_MAPPING.DELETE).send();
+          reply.code(statusCodes.DELETE).send();
         }
       );
     }

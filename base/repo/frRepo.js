@@ -1,13 +1,9 @@
-const Helpers = require('../helpers/helpers');
-const { KuryemError, ErrorCodes } = require('../common/error/kuryemError');
-const AWS = require('aws-sdk');
-const docClient = new AWS.DynamoDB.DocumentClient();
-const { v1: uuidv1 } = require('uuid');
+const utilities = require('../../helpers/utilities');
+const { frError, ErrorCodes } = require('../../error/frError');
 const moment = require('moment');
 const { ObjectId } = require('mongodb');
-const settings = require('./enums/settings');
 
-const baseRepository = {
+const frRepo = {
   //* Creates given document
   create: async (db, collection, document, userId) => {
     const unix = moment().unix();
@@ -35,8 +31,6 @@ const baseRepository = {
     }
 
     return document;
-
-    //return baseRepository.save(document, collection, createdUserId);
   },
 
   //* Updates given document
@@ -69,11 +63,19 @@ const baseRepository = {
       is_deleted: true,
       deleted_at: unix,
       deleted_at_string: moment.unix(unix).format(),
+      deleted_by: userId,
     };
 
     document['_meta'] = { ...document['_meta'], ...metaObject };
 
-    return baseRepository.update(db, collection, document, userId);
+    const _where = { _id: document._id };
+
+    let updateResult = await db.collection(collection).update(_where, document);
+    if (updateResult.result.nModified === 0) {
+      throw new Error('Resource not found.');
+    }
+
+    return document;
   },
 
   //* executes query method.
@@ -84,11 +86,11 @@ const baseRepository = {
     collection = '',
     raiseExec = true
   ) => {
-    let _where = Helpers.preProcessWhere(where);
+    let _where = utilities.preProcessWhere(where);
 
     let founded = await db.collection(collection).findOne(_where, select);
     if (raiseExec && founded == null) {
-      throw new KuryemError({
+      throw new frError({
         message: `Resource not found in db by given clause: <${where}>`,
         code: ErrorCodes.ResourceNotFound,
         status: 404,
@@ -96,7 +98,7 @@ const baseRepository = {
     }
 
     if (raiseExec && founded._meta.is_deleted == true) {
-      throw new KuryemError({
+      throw new frError({
         message: `This data is deleted.`,
         code: ErrorCodes.ResourceAlreadyDeleted,
         status: 404,
@@ -107,7 +109,6 @@ const baseRepository = {
   },
 
   //* Executes scan method.
-  //* Returns items - lastevaluatedkey - count
   query: async (
     where = null,
     select = null,
@@ -117,7 +118,7 @@ const baseRepository = {
     db = null,
     collection = null
   ) => {
-    let _where = Helpers.preProcessWhere({
+    let _where = utilities.preProcessWhere({
       '_meta.is_deleted': false,
       ...where,
     });
@@ -148,4 +149,4 @@ const baseRepository = {
   },
 };
 
-module.exports = baseRepository;
+module.exports = frRepo;

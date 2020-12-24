@@ -1,12 +1,12 @@
 const ErrorCodes = require('./errorCodes');
 
-function KuryemError({
+function FrError({
   message = '',
-  code = 'errors.internalError',
+  code = ErrorCodes.BadRequest,
   status = 500,
   context = {},
 } = {}) {
-  this.name = 'KuryemError';
+  this.name = 'FrError';
   this.message = message;
   this.code = code;
   this.status = status;
@@ -14,5 +14,5 @@ function KuryemError({
   const error = new Error(this.errMsg);
   error.name = this.name;
 }
-KuryemError.prototype = Object.create(Error.prototype);
-module.exports = { KuryemError, ErrorCodes };
+FrError.prototype = Object.create(Error.prototype);
+module.exports = { FrError, ErrorCodes };
