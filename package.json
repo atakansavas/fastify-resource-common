@@ -17,8 +17,8 @@
   "author": "atakan savas",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^7.0.2",
-    "axios": "^0.21.1",
+    "ajv": "^6.5.5",
+    "axios": "^0.20.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.3"
   }
