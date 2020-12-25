@@ -73,4 +73,4 @@ class RequestHelper {
   }
 }
 
-export default RequestHelper;
+module.exports = RequestHelper;
