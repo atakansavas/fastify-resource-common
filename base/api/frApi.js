@@ -17,6 +17,7 @@ module.exports = class FrApi {
     this.methods = methods;
     this.tableName = tableName;
     this.service = service || 'fr';
+    this.authMethod = authMethod;
   }
 
   generateUrls() {
@@ -64,7 +65,7 @@ module.exports = class FrApi {
         async (request, reply) => {
           let user = {};
           let authHeader = request.headers.authorization || null;
-          user = await AuthFunctions.validateAuthHeader(
+          user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -118,7 +119,7 @@ module.exports = class FrApi {
         async (request, reply) => {
           let user = {};
           let authHeader = request.headers.authorization || null;
-          user = await AuthFunctions.validateAuthHeader(
+          user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -156,7 +157,7 @@ module.exports = class FrApi {
         },
         async (request, reply) => {
           let authHeader = request.headers.authorization || null;
-          var user = await AuthFunctions.validateAuthHeader(
+          var user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -195,7 +196,7 @@ module.exports = class FrApi {
         async (request, reply) => {
           let user = {};
           let authHeader = request.headers.authorization || null;
-          user = await AuthFunctions.validateAuthHeader(
+          user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -232,7 +233,7 @@ module.exports = class FrApi {
         },
         async (request, reply) => {
           let authHeader = request.headers.authorization || null;
-          var user = await AuthFunctions.validateAuthHeader(
+          var user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
