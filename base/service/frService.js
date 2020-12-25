@@ -1,7 +1,8 @@
 const FrRepo = require('../repo/frRepo');
 const Validator = require('../../helpers/validationHelper');
 const Utilities = require('../../helpers/utilities');
-const { frError, ErrorCodes } = require('../../error/frError');
+const frError = require('../../error/frError');
+const ErrorCodes = require('../../error/errorCodes');
 
 const FrService = {
   read: async ({ db, id = null, tableName = null, user = null } = {}) => {

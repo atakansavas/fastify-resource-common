@@ -1,5 +1,6 @@
 const utilities = require('../../helpers/utilities');
-const { frError, ErrorCodes } = require('../../error/frError');
+const frError = require('../../error/frError');
+const ErrorCodes = require('../../error/errorCodes');
 const moment = require('moment');
 const { ObjectId } = require('mongodb');
 
