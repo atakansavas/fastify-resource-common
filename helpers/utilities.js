@@ -43,21 +43,21 @@ const utilities = {
       let _ids = [];
 
       where['_id']['$in'].forEach((id) => {
-        _ids.push(helpers.makeObjectId(id));
+        _ids.push(utilities.makeObjectId(id));
       });
 
       where['_id']['$in'] = _ids;
 
       return where;
     } else if (typeof where['_id'] === 'string') {
-      where['_id'] = helpers.makeObjectId(where['_id']);
+      where['_id'] = utilities.makeObjectId(where['_id']);
 
       return where;
     }
     return where;
   },
   preProcessWhere: (where) => {
-    let normalizedWhere = helpers.normalizeIds(where);
+    let normalizedWhere = utilities.normalizeIds(where);
     return normalizedWhere;
   },
   runFunctionPool: async (functions, params) => {
