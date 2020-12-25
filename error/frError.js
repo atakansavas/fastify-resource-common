@@ -15,4 +15,4 @@ function FrError({
   error.name = this.name;
 }
 FrError.prototype = Object.create(Error.prototype);
-module.exports = { FrError, ErrorCodes };
+module.exports = FrError;
