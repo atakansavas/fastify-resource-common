@@ -13,7 +13,7 @@ const Utilities = require('./helpers/utilities');
 const ValidationHelper = require('./helpers/validationHelper');
 // const RequestHelper = require('./helpers/requestHelper');
 
-const PackageSms = require('./packages/sms');
+const TableNames = require('./config/tableNames');
 
 module.exports = {
   FrApi,
@@ -27,4 +27,5 @@ module.exports = {
   Utilities,
   ValidationHelper,
   PackageSms,
+  TableNames,
 };
