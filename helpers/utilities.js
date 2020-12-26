@@ -1,4 +1,5 @@
-const { frError, ErrorCodes } = require('../error/frError');
+const frError = require('../error/frError');
+const ErrorCodes = require('../error/errorCodes');
 const { ObjectId } = require('mongodb');
 
 const utilities = {
@@ -63,7 +64,7 @@ const utilities = {
   runFunctionPool: async (functions, params) => {
     let resource = params.resource;
     if (!resource) {
-      throw new KuryemError({
+      throw new frError({
         message: 'Resource must be in parameters',
         code: 'errors.internalError',
         status: 500,

@@ -13,6 +13,8 @@ const Utilities = require('./helpers/utilities');
 const ValidationHelper = require('./helpers/validationHelper');
 // const RequestHelper = require('./helpers/requestHelper');
 
+const PackageSms = require('./packages/sms');
+
 module.exports = {
   FrApi,
   FrRepo,
@@ -24,4 +26,5 @@ module.exports = {
   RequestHelper,
   Utilities,
   ValidationHelper,
+  PackageSms,
 };

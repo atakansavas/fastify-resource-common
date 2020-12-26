@@ -1,5 +1,3 @@
-const Config = require('../config');
-
 const authHelper = {
   getLoginQuery: (params) => {
     return {

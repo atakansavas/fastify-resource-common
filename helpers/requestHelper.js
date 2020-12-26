@@ -1,4 +1,5 @@
-const { FrError, ErrorCodes } = require('../error/frError');
+const frError = require('../error/frError');
+const ErrorCodes = require('../error/errorCodes');
 const axios = require('axios');
 
 class RequestHelper {
