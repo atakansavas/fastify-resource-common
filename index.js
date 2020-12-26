@@ -26,6 +26,5 @@ module.exports = {
   RequestHelper,
   Utilities,
   ValidationHelper,
-  PackageSms,
   TableNames,
 };
