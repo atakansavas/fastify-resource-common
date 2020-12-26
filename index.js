@@ -2,8 +2,7 @@ const FrApi = require('./base/api/frApi');
 const FrRepo = require('./base/repo/frRepo');
 const FrService = require('./base/service/frService');
 
-const enumSettings = require('./enums/settings');
-const enumSettingsGroup = require('./enums/settingsGroups');
+const Enum = require('./enums/index');
 
 const FrError = require('./error/frError');
 const FrErrorCodes = require('./error/errorCodes');
@@ -19,8 +18,7 @@ module.exports = {
   FrApi,
   FrRepo,
   FrService,
-  enumSettings,
-  enumSettingsGroup,
+  Enum,
   FrError,
   FrErrorCodes,
   RequestHelper,
