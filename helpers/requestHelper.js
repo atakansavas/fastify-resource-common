@@ -29,7 +29,7 @@ class RequestHelper {
   handleError = (error) => {
     console.error('REQUEST ERROR ', error);
 
-    throw new FrError({
+    throw new frError({
       message: 'Error while making request.',
       code: ErrorCodes.RequestError,
       status: 500,
