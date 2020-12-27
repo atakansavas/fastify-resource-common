@@ -7,10 +7,7 @@ const Enum = require('./enums/index');
 const FrError = require('./error/frError');
 const FrErrorCodes = require('./error/errorCodes');
 
-const RequestHelper = require('./helpers/requestHelper');
-const Utilities = require('./helpers/utilities');
-const ValidationHelper = require('./helpers/validationHelper');
-// const RequestHelper = require('./helpers/requestHelper');
+const Helpers = require('./helpers/index');
 
 const TableNames = require('./config/tableNames');
 
@@ -21,8 +18,6 @@ module.exports = {
   Enum,
   FrError,
   FrErrorCodes,
-  RequestHelper,
-  Utilities,
-  ValidationHelper,
+  Helpers,
   TableNames,
 };
