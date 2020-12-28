@@ -32,9 +32,9 @@ class RequestHelper {
     throw new frError({
       message: 'Error while making request.',
       code: ErrorCodes.RequestError,
-      status: 500,
+      status: error.response.status,
       context: {
-        message: error,
+        message: error.response,
       },
     });
   };
