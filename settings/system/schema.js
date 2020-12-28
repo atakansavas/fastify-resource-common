@@ -2,6 +2,7 @@ const settingSchema = {
   settingSchema: {
     type: 'object',
     additionalProperties: false,
+    required: ['groupId', 'key', 'title', 'value'],
     properties: {
       groupId: {
         type: 'number',

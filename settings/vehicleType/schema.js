@@ -2,6 +2,7 @@ const settingSchema = {
   settingSchema: {
     type: 'object',
     additionalProperties: false,
+    required: ['groupId', 'key', 'value', 'multiplier'],
     properties: {
       groupId: {
         type: 'number',
@@ -12,7 +13,7 @@ const settingSchema = {
       title: {
         type: 'string',
       },
-      type: {
+      value: {
         type: 'string',
       },
       multiplier: {
