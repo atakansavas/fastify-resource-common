@@ -7,6 +7,9 @@ const tableNames = {
   VerificationDb: 'verifications_db',
   SettingsDb: 'settings_db',
   SettingsHistoryDb: 'settings_history_db',
+  CitiesDb: 'cities_db',
+  CountiesDb: 'counties_db',
+  DistrictsDb: 'districts_db',
 };
 
 module.exports = tableNames;
