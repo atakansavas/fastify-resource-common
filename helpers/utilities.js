@@ -40,21 +40,42 @@ const utilities = {
       return where;
     }
 
-    if (where['_id'] instanceof Array && '$in' in where['_id']) {
-      let _ids = [];
+    if (where['_id']) {
+      if (where['_id'] instanceof Array && '$in' in where['_id']) {
+        let _ids = [];
 
-      where['_id']['$in'].forEach((id) => {
-        _ids.push(utilities.makeObjectId(id));
-      });
+        where['_id']['$in'].forEach((id) => {
+          _ids.push(utilities.makeObjectId(id));
+        });
 
-      where['_id']['$in'] = _ids;
-
-      return where;
-    } else if (typeof where['_id'] === 'string') {
-      where['_id'] = utilities.makeObjectId(where['_id']);
-
-      return where;
+        where['_id']['$in'] = _ids;
+      } else if (typeof where['_id'] === 'string') {
+        where['_id'] = utilities.makeObjectId(where['_id']);
+      }
     }
+
+    if (where['_meta.user_id']) {
+      where['_meta.user_id'] = utilities.makeObjectId(where['_meta.user_id']);
+    }
+
+    if (where['_meta.created_by']) {
+      where['_meta.created_by'] = utilities.makeObjectId(
+        where['_meta.created_by']
+      );
+    }
+
+    if (where['_meta.modified_by']) {
+      where['_meta.modified_by'] = utilities.makeObjectId(
+        where['_meta.modified_by']
+      );
+    }
+
+    if (where['_meta.deleted_by']) {
+      where['_meta.deleted_by'] = utilities.makeObjectId(
+        where['_meta.deleted_by']
+      );
+    }
+
     return where;
   },
   preProcessWhere: (where) => {

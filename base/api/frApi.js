@@ -27,6 +27,7 @@ module.exports = class FrApi {
       update: this.routePrefix + '/:resourceId',
       delete: this.routePrefix + '/:resourceId',
       query: this.routePrefix + '/_query',
+      me: this.routePrefix + '/me',
     };
   }
 
@@ -72,6 +73,63 @@ module.exports = class FrApi {
           );
 
           let where = request.body.where || {};
+          let select = request.body.select || {};
+          let limit = parseInt(request.body.limit) || 50;
+          let page = parseInt(request.body.page) || 0;
+          let sort = request.body.sort || { _id: 1 };
+
+          let result = await this.service.filter({
+            db: this.opts.db,
+            where: where,
+            select: select,
+            limit: limit,
+            page: page,
+            sort: sort,
+            tableName: this.tableName,
+            user: user,
+          });
+
+          let _response = [];
+          for (let document of result.items) {
+            let _document = Utilities.runReadFormatter(
+              readFormatters,
+              document
+            );
+            _response.push(_document);
+          }
+
+          reply.code(statusCodes.QUERY).send({
+            items: _response,
+            totalCount: result.count,
+          });
+        }
+      );
+    }
+
+    if (this.methods.includes('ME')) {
+      this.fastify.get(
+        urls.me,
+        {
+          schema: {
+            tags: [this.tableName],
+            response: {
+              201: createValidationSchema,
+            },
+          },
+        },
+        async (request, reply) => {
+          let user = {};
+          let authHeader = request.headers.authorization || null;
+          user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
+
+          let where = request.body.where || {
+            user_id: user._id,
+          };
+
           let select = request.body.select || {};
           let limit = parseInt(request.body.limit) || 50;
           let page = parseInt(request.body.page) || 0;
