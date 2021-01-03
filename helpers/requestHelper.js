@@ -32,7 +32,7 @@ class RequestHelper {
     throw new frError({
       message: 'Error while making request.',
       code: ErrorCodes.RequestError,
-      status: error.response.status,
+      status: error.response ? error.response.status : 502,
       context: {
         message: error.response,
       },
@@ -55,7 +55,6 @@ class RequestHelper {
         this.service
           .post({
             url: this.baseUrl + path,
-            method: 'POST',
             responseType: 'json',
             data: payload,
           })
