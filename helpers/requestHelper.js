@@ -30,7 +30,7 @@ class RequestHelper {
     console.error('REQUEST ERROR ', error);
 
     throw new frError({
-      message: 'Error while making request.',
+      message: error.response ? error.response.message : error.message,
       code: ErrorCodes.RequestError,
       status: error.response ? error.response.status : 502,
       context: {
@@ -53,10 +53,8 @@ class RequestHelper {
     return new Promise((resolve, reject) => {
       resolve(
         this.service
-          .post({
-            url: this.baseUrl + path,
-            responseType: 'json',
-            data: payload,
+          .post(this.baseUrl + path, {
+            payload,
           })
           .then((response) => {
             return response.data;
