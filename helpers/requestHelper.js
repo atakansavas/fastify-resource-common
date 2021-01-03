@@ -46,31 +46,24 @@ class RequestHelper {
           return response.data;
         })
       );
-
-      // .then((response) => callback(response.status, response.data));
     });
   }
 
-  patch(path, payload, callback) {
-    return this.service
-      .request({
-        method: 'PATCH',
-        url: path,
-        responseType: 'json',
-        data: payload,
-      })
-      .then((response) => callback(response.status, response.data));
-  }
-
-  post(path, payload, callback) {
-    return this.service
-      .request({
-        method: 'POST',
-        url: path,
-        responseType: 'json',
-        data: payload,
-      })
-      .then((response) => callback(response.status, response.data));
+  post(path, payload) {
+    return new Promise((resolve, reject) => {
+      resolve(
+        this.service
+          .post({
+            url: this.baseUrl + path,
+            method: 'POST',
+            responseType: 'json',
+            data: payload,
+          })
+          .then((response) => {
+            return response.data;
+          })
+      );
+    });
   }
 }
 
