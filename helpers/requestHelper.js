@@ -30,11 +30,11 @@ class RequestHelper {
     console.error('REQUEST ERROR ', error);
 
     throw new frError({
-      message: error.response ? error.response.message : error.message,
+      message: error.response ? error.response.data.message : error.message,
       code: ErrorCodes.RequestError,
       status: error.response ? error.response.status : 502,
       context: {
-        message: error.response,
+        message: error.response ? error.response.data : error,
       },
     });
   };
@@ -52,13 +52,9 @@ class RequestHelper {
   post(path, payload) {
     return new Promise((resolve, reject) => {
       resolve(
-        this.service
-          .post(this.baseUrl + path, {
-            payload,
-          })
-          .then((response) => {
-            return response.data;
-          })
+        this.service.post(this.baseUrl + path, payload).then((response) => {
+          return response.data;
+        })
       );
     });
   }
