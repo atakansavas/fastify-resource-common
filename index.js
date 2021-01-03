@@ -9,7 +9,7 @@ const FrErrorCodes = require('./error/errorCodes');
 
 const Helpers = require('./helpers/index');
 
-const TableNames = require('./config/tableNames');
+const Configs = require('./config/index');
 
 module.exports = {
   FrApi,
@@ -19,5 +19,5 @@ module.exports = {
   FrError,
   FrErrorCodes,
   Helpers,
-  TableNames,
+  Configs,
 };
