@@ -10,6 +10,7 @@ const tableNames = {
   CitiesDb: 'cities_db',
   CountiesDb: 'counties_db',
   DistrictsDb: 'districts_db',
+  AddressesDb: 'addresses_db',
 };
 
 module.exports = tableNames;
