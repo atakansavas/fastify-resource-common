@@ -131,6 +131,7 @@ module.exports = class FrApi {
             user_id: user._id,
           };
 
+          const select = {};
           let limit = 50;
           let page = 0;
           let sort = { _id: 1 };
