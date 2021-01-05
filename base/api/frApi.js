@@ -18,6 +18,7 @@ module.exports = class FrApi {
     this.tableName = tableName;
     this.service = service || 'fr';
     this.authMethod = authMethod;
+    this.isUseMeService = methods.includes('ME');
   }
 
   generateUrls() {
@@ -232,6 +233,7 @@ module.exports = class FrApi {
             afterCreate: afterCreate,
             tableName: this.tableName,
             user,
+            isUseMeService: this.isUseMeService,
           });
           document = await Utilities.runReadFormatter(readFormatters, document);
 

@@ -26,6 +26,7 @@ const FrService = {
     afterCreate = [],
     tableName = null,
     user = null,
+    isUseMeService = false,
   } = {}) => {
     if (schema !== {}) {
       let { valid, ajv } = Validator.validateBodyBySchema(body, schema);
@@ -56,6 +57,10 @@ const FrService = {
     };
 
     let resource = body;
+
+    if (isUseMeService) {
+      resource.user_id = user._id;
+    }
 
     if (beforeCreate !== []) {
       resource = await Utilities.runFunctionPool(beforeCreate, pipelineParams);
