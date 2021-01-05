@@ -27,7 +27,7 @@ module.exports = class FrApi {
       update: this.routePrefix + '/:resourceId',
       delete: this.routePrefix + '/:resourceId',
       query: this.routePrefix + '/_query',
-      me: this.routePrefix + '/me',
+      me: this.routePrefix + '/',
     };
   }
 
