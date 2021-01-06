@@ -117,7 +117,8 @@ const FrRepo = {
     page = null,
     sort = null,
     db = null,
-    collection = null
+    collection = null,
+    token = ''
   ) => {
     let _where = utilities.preProcessWhere({
       '_meta.is_deleted': false,

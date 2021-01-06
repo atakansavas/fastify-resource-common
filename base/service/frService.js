@@ -27,6 +27,7 @@ const FrService = {
     tableName = null,
     user = null,
     isUseMeService = false,
+    token = '',
   } = {}) => {
     if (schema !== {}) {
       let { valid, ajv } = Validator.validateBodyBySchema(body, schema);
@@ -54,6 +55,7 @@ const FrService = {
       tableName: tableName,
       body: body,
       _resource: body,
+      token: token,
     };
 
     let resource = body;
@@ -83,6 +85,7 @@ const FrService = {
     afterUpdate = [],
     tableName = null,
     user = null,
+    token = '',
   } = {}) => {
     if (schema !== {}) {
       let { valid, ajv } = Validator.validateBodyBySchema(body, schema);
@@ -138,6 +141,7 @@ const FrService = {
       tableName: tableName,
       body: body,
       _resource: _resource,
+      token: token,
     };
 
     if (beforeUpdate !== [] && beforeUpdate.length > 0) {
@@ -159,6 +163,7 @@ const FrService = {
     afterDelete = [],
     tableName = null,
     user = null,
+    token = '',
   } = {}) => {
     let where = { _id: _id };
 
@@ -177,6 +182,7 @@ const FrService = {
       user: user,
       tableName: tableName,
       _resource: resource,
+      token: token,
     };
 
     if (beforeDelete !== []) {
@@ -200,6 +206,7 @@ const FrService = {
     sort = null,
     tableName = null,
     user = null,
+    token = '',
   } = {}) => {
     let result = await FrRepo.query(
       where,
@@ -208,7 +215,8 @@ const FrService = {
       page,
       sort,
       db,
-      tableName
+      tableName,
+      token
     );
     return result;
   },

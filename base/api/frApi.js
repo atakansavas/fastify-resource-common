@@ -88,6 +88,7 @@ module.exports = class FrApi {
             sort: sort,
             tableName: this.tableName,
             user: user,
+            token: authHeader,
           });
 
           let _response = [];
@@ -146,6 +147,7 @@ module.exports = class FrApi {
             sort: sort,
             tableName: this.tableName,
             user: user,
+            token: authHeader,
           });
 
           let _response = [];
@@ -235,6 +237,7 @@ module.exports = class FrApi {
             tableName: this.tableName,
             user,
             isUseMeService: this.isUseMeService,
+            token: authHeader,
           });
           document = await Utilities.runReadFormatter(readFormatters, document);
 
@@ -276,6 +279,7 @@ module.exports = class FrApi {
             afterUpdate: afterUpdate,
             tableName: this.tableName,
             user: user,
+            token: authHeader,
           });
 
           document = await Utilities.runReadFormatter(readFormatters, document);
@@ -310,6 +314,7 @@ module.exports = class FrApi {
             afterDelete: afterDelete,
             tableName: this.tableName,
             user: user,
+            token: authHeader,
           });
 
           reply.code(statusCodes.DELETE).send();
