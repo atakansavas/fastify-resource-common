@@ -1,6 +1,7 @@
 const tableNames = {
   RolesDb: 'roles_db',
   UsersDb: 'users_db',
+  AddressesDb: 'addresses_db',
   AdminsDb: 'admins_db',
   CouriersDb: 'couriers_db',
   PagesDb: 'pages_db',
@@ -10,7 +11,9 @@ const tableNames = {
   CitiesDb: 'cities_db',
   CountiesDb: 'counties_db',
   DistrictsDb: 'districts_db',
-  AddressesDb: 'addresses_db',
+  OrdersDb: 'orders_db',
+  PaymentsDb: 'payments_db',
+  OrderStatuesDb: 'orderstatues_db',
 };
 
 module.exports = tableNames;

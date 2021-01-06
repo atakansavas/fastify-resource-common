@@ -129,6 +129,7 @@ module.exports = class FrApi {
 
           let where = {
             user_id: user._id,
+            status: true,
           };
 
           const select = {};
