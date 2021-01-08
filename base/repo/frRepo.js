@@ -125,7 +125,9 @@ const FrRepo = {
       ...where,
     });
 
-    let cursor = await db.collection(collection).find(_where, select);
+    let cursor = await db
+      .collection(collection)
+      .find(_where, { projection: { ...select } });
 
     let totalCount = await cursor.count();
 
