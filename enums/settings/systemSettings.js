@@ -1,4 +1,4 @@
-const Enum = require('../base/enum/index');
+const Enum = require('../../base/enum/index');
 
 const SystemSettings = new Enum({
   TCKNCheck: '1',
