@@ -6,6 +6,7 @@ const SystemSettings = new Enum({
   StartingPrice: '3',
   StepPrice: '4',
   AppVersion: '5',
+  BridgePrice: '6',
 });
 
 module.exports = SystemSettings;

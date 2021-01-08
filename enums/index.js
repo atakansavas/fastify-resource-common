@@ -1,8 +1,8 @@
 const Groups = require('./settingGroups');
 
 const System = require('./systemSettings');
-const PackageTypes = require('./packageTypes');
-const VehicleTypes = require('./vehicleTypes');
+const PackageTypes = require('./settings/packageTypes');
+const VehicleTypes = require('./settings/vehicleTypes');
 const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
 const AddressTypes = require('./addressTypes');
