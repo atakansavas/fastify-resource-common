@@ -7,16 +7,10 @@ const settingSchema = {
       value: {
         type: 'string',
       },
-      length: {
+      minValue: {
         type: 'number',
       },
-      width: {
-        type: 'number',
-      },
-      height: {
-        type: 'number',
-      },
-      weight: {
+      maxValue: {
         type: 'number',
       },
       multiplier: {
