@@ -3,6 +3,7 @@ const Groups = require('./settingGroups');
 const System = require('./settings/systemSettings');
 const PackageTypes = require('./settings/packageTypes');
 const VehicleTypes = require('./settings/vehicleTypes');
+const DurationPrices = require('./settings/durationPrices');
 const Zones = require('./settings/zones');
 const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
@@ -17,4 +18,5 @@ module.exports = {
   OrderTypes,
   AddressTypes,
   Zones,
+  DurationPrices,
 };
