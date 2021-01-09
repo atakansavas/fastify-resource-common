@@ -1,3 +1,5 @@
+const enums = require('../../enums/index');
+
 const settingSchema = {
   settingSchema: {
     type: 'object',
@@ -8,13 +10,22 @@ const settingSchema = {
         type: 'number',
       },
       to: {
-        type: 'number',
-      },
-      multipler: {
-        type: 'number',
-      },
-      duration: {
-        type: 'number',
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            zone: {
+              type: 'number',
+              enums: [enums.Zones.keys()],
+            },
+            multipler: {
+              type: 'number',
+            },
+            duration: {
+              type: 'number',
+            },
+          },
+        },
       },
     },
   },
