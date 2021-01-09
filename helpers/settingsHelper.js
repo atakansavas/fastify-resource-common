@@ -8,7 +8,7 @@ const settingsHelper = {
       case 3:
         return require('../settings/vehicleType/schema').settingSchema;
       case 4:
-        return require('../settings/locations/schema').settingSchema;
+        return require('../settings/zonePrices/schema').settingSchema;
       default:
         return null;
         break;

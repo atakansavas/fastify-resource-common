@@ -7,6 +7,8 @@ const SettingGroups = new Enum({
   PackageType: '2',
   //* Arac tiplero
   VehicleType: '3',
+  //* Zone ucretleri
+  ZonePrices: '4',
 });
 
 module.exports = SettingGroups;
