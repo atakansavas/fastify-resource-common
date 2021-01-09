@@ -10,10 +10,13 @@ const settingSchema = {
       multiplier: {
         type: 'number',
       },
+      minValue: {
+        type: 'number',
+      },
       active: {
         type: 'string',
       },
-      minPrice: {
+      startingPrice: {
         type: 'number',
       },
     },
