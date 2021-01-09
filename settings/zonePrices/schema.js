@@ -4,7 +4,7 @@ const settingSchema = {
   settingSchema: {
     type: 'object',
     additionalProperties: false,
-    required: ['from', 'to', 'multipler', 'duration'],
+    required: ['from', 'to'],
     properties: {
       from: {
         type: 'number',
