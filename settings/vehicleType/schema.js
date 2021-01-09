@@ -10,6 +10,12 @@ const settingSchema = {
       multiplier: {
         type: 'number',
       },
+      active: {
+        type: 'string',
+      },
+      minPrice: {
+        type: 'number',
+      },
     },
   },
 };
