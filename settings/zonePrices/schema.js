@@ -2,7 +2,7 @@ const settingSchema = {
   settingSchema: {
     type: 'object',
     additionalProperties: false,
-    required: ['value', 'multiplier'],
+    required: ['from', 'to', 'multipler', 'duration'],
     properties: {
       from: {
         type: 'number',
