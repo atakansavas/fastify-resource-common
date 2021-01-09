@@ -49,12 +49,9 @@ module.exports = class FrApi {
     afterDelete = [],
     readFormatters = [],
   } = {}) {
-    if (this.service == 'fr') {
-    }
-
     const urls = this.generateUrls();
 
-    console.info('Resource initialized on', Object.values(urls));
+    console.info(this.routePrefix + ' resource initialized on', this.methods);
 
     if (this.methods.includes('QUERY')) {
       this.fastify.post(
