@@ -18,7 +18,7 @@ const settingSchema = {
               type: 'number',
               enums: [enums.Zones.keys()],
             },
-            multipler: {
+            multiplier: {
               type: 'number',
             },
             duration: {
