@@ -9,7 +9,6 @@ const settingsHelper = {
         return require('../settings/vehicleType/schema').settingSchema;
       case 4:
         return require('../settings/zonePrices/schema').settingSchema;
-      default:
       case 5:
         return require('../settings/durationPrices/schema').settingSchema;
       default:
