@@ -13,11 +13,8 @@ const settingSchema = {
       minValue: {
         type: 'number',
       },
-      active: {
+      status: {
         type: 'string',
-      },
-      startingPrice: {
-        type: 'number',
       },
     },
   },
