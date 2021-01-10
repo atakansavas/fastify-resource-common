@@ -22,7 +22,7 @@ const settingsHelper = {
   },
 
   getSettingsSchema: (groupId) => {
-    const groupSchema = this.getGroupSchema(groupId);
+    const groupSchema = settingsHelper.getGroupSchema(groupId);
     settingsSchema.createSchema.properties.detail = { ...groupSchema };
     return settingsSchema.createSchema;
   },
