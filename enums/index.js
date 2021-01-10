@@ -4,6 +4,7 @@ const System = require('./settings/systemSettings');
 const PackageTypes = require('./settings/packageTypes');
 const VehicleTypes = require('./settings/vehicleTypes');
 const DurationPrices = require('./settings/durationPrices');
+const DistancePrices = require('./settings/distancePrices');
 const Zones = require('./settings/zones');
 const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
@@ -19,4 +20,5 @@ module.exports = {
   AddressTypes,
   Zones,
   DurationPrices,
+  DistancePrices,
 };
