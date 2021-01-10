@@ -1,3 +1,5 @@
+const settingsSchema = require('../settings/schema/schema');
+
 const settingsHelper = {
   getGroupSchema: (groupId) => {
     switch (groupId) {
@@ -17,6 +19,12 @@ const settingsHelper = {
         return null;
         break;
     }
+  },
+
+  getSettingsSchema: (groupId) => {
+    const groupSchema = this.getGroupSchema(groupId);
+    settingsSchema.createSchema.properties.detail = { ...groupSchema };
+    return settingsSchema.createSchema;
   },
 };
 

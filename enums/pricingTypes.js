@@ -1,10 +1,10 @@
 const Enum = require('../base/enum/index');
 
 const SettingGroups = new Enum({
-  km: '1',
-  mesafe: '2',
-  sabit: '3',
-  bolge: '4',
+  Km: '1',
+  Duration: '2',
+  Distance: '3',
+  Zone: '4',
 });
 
 module.exports = SettingGroups;
