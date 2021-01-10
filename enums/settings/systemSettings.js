@@ -7,6 +7,8 @@ const SystemSettings = new Enum({
   StepPrice: '4',
   AppVersion: '5',
   BridgePrice: '6',
+  KMPrice: '7',
+  PlannedOrderVisibleTime: '8',
 });
 
 module.exports = SystemSettings;
