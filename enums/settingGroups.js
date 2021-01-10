@@ -9,8 +9,10 @@ const SettingGroups = new Enum({
   VehicleType: '3',
   //* Zone ucretleri
   ZonePrices: '4',
+  //* Mesafe ucretleri
+  DistancePrices: '5',
   //* Sure ucretleri
-  DurationPrices: '5',
+  DurationPrices: '6',
 });
 
 module.exports = SettingGroups;

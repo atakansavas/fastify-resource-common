@@ -11,6 +11,8 @@ const settingsHelper = {
         return require('../settings/zonePrices/schema').settingSchema;
       case 5:
         return require('../settings/durationPrices/schema').settingSchema;
+      case 6:
+        return require('../settings/distancePrices/schema').settingSchema;
       default:
         return null;
         break;

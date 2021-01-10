@@ -1,19 +1,19 @@
 const Enum = require('../../base/enum/index');
 
 const SettingGroups = new Enum({
-  Distance1: '1',
-  Distance2: '2',
-  Distance3: '3',
-  Distance4: '4',
-  Distance5: '5',
-  Distance6: '6',
-  Distance7: '7',
-  Distance8: '8',
-  Distance9: '9',
-  Distance10: '10',
-  Distance11: '11',
-  Distance12: '12',
-  Distance13: '13',
+  Duration1: '1',
+  Duration2: '2',
+  Duration3: '3',
+  Duration4: '4',
+  Duration5: '5',
+  Duration6: '6',
+  Duration7: '7',
+  Duration8: '8',
+  Duration9: '9',
+  Duration10: '10',
+  Duration11: '11',
+  Duration12: '12',
+  Duration13: '13',
 });
 
 module.exports = SettingGroups;
