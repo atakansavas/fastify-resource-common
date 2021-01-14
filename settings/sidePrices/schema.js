@@ -5,7 +5,7 @@ const settingSchema = {
     required: ['citySide'],
     properties: {
       citySide: {
-        type: 'string',
+        type: 'number',
       },
       multiplier: {
         type: 'number',
