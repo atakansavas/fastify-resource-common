@@ -2,7 +2,7 @@ const settingSchema = {
   settingSchema: {
     type: 'object',
     additionalProperties: false,
-    required: ['value'],
+    required: ['citySide'],
     properties: {
       citySide: {
         type: 'string',
