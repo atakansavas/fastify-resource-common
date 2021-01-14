@@ -11,8 +11,8 @@ const SettingGroups = new Enum({
   ZonePrices: '4',
   //* Mesafe ucretleri
   DistancePrices: '5',
-  //* Sure ucretleri
-  DurationPrices: '6',
+  //* Yaka ucretleri
+  SidePrices: '6',
 });
 
 module.exports = SettingGroups;

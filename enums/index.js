@@ -5,6 +5,7 @@ const PackageTypes = require('./settings/packageTypes');
 const VehicleTypes = require('./settings/vehicleTypes');
 const DurationPrices = require('./settings/durationPrices');
 const DistancePrices = require('./settings/distancePrices');
+const SidePrices = require('./settings/sidePrices');
 const Zones = require('./settings/zones');
 const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
@@ -21,4 +22,5 @@ module.exports = {
   Zones,
   DurationPrices,
   DistancePrices,
+  SidePrices,
 };

@@ -14,7 +14,7 @@ const settingsHelper = {
       case 5:
         return require('../settings/durationPrices/schema').settingSchema;
       case 6:
-        return require('../settings/distancePrices/schema').settingSchema;
+        return require('../settings/sidePrices/schema').settingSchema;
       default:
         return null;
         break;
