@@ -236,9 +236,12 @@ module.exports = class FrApi {
             isUseMeService: this.isUseMeService,
             token: authHeader,
           });
-          document = await Utilities.runReadFormatter(readFormatters, document);
+          const formattedDocument = await Utilities.runReadFormatter(
+            readFormatters,
+            document
+          );
 
-          reply.code(statusCodes.CREATE).send(document);
+          reply.code(statusCodes.CREATE).send(formattedDocument);
         }
       );
     }

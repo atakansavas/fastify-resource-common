@@ -58,6 +58,16 @@ class RequestHelper {
       );
     });
   }
+
+  put(path, payload) {
+    return new Promise((resolve, reject) => {
+      resolve(
+        this.service.put(this.baseUrl + path, payload).then((response) => {
+          return response.data;
+        })
+      );
+    });
+  }
 }
 
 module.exports = RequestHelper;
