@@ -208,8 +208,8 @@ module.exports = class FrApi {
         {
           schema: {
             tags: [this.tableName],
-            // body: this.clearSchemas(createValidationSchema),
-            body: createValidationSchema,
+            body: this.clearSchemas(createValidationSchema),
+            // body: createValidationSchema,
             response: {
               201: createValidationSchema,
             },
