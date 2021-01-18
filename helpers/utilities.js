@@ -54,6 +54,10 @@ const utilities = {
       }
     }
 
+    if (where['user_id']) {
+      where['user_id'] = utilities.makeObjectId(where['user_id']);
+    }
+
     if (where['_meta.user_id']) {
       where['_meta.user_id'] = utilities.makeObjectId(where['_meta.user_id']);
     }
