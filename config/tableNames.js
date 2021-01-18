@@ -14,6 +14,7 @@ const tableNames = {
   OrdersDb: 'orders_db',
   PaymentsDb: 'payments_db',
   OrderStatuesDb: 'orderstatues_db',
+  PreOrder: 'preorder_db',
 };
 
 module.exports = tableNames;
