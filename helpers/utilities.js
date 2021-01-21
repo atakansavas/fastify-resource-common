@@ -41,7 +41,7 @@ const utilities = {
     }
 
     if (where['_id']) {
-      if (where['_id'] instanceof Array && '$in' in where['_id']) {
+      if (where['_id'] instanceof Object && '$in' in where['_id']) {
         let _ids = [];
 
         where['_id']['$in'].forEach((id) => {
