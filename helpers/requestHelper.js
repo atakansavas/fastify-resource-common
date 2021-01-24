@@ -40,6 +40,9 @@ class RequestHelper {
   };
 
   get(path) {
+    if (process.env.KEEPLOGS == 1) {
+      console.info('REQUEST => GET', this.baseUrl + path);
+    }
     return new Promise((resolve, reject) => {
       resolve(
         this.service.get(this.baseUrl + path).then((response) => {
@@ -50,6 +53,9 @@ class RequestHelper {
   }
 
   post(path, payload) {
+    if (process.env.KEEPLOGS == 1) {
+      console.info('REQUEST => POST', this.baseUrl + path, payload);
+    }
     return new Promise((resolve, reject) => {
       resolve(
         this.service.post(this.baseUrl + path, payload).then((response) => {
@@ -60,6 +66,9 @@ class RequestHelper {
   }
 
   put(path, payload) {
+    if (process.env.KEEPLOGS == 1) {
+      console.info('REQUEST => PUT', this.baseUrl + path, payload);
+    }
     return new Promise((resolve, reject) => {
       resolve(
         this.service.put(this.baseUrl + path, payload).then((response) => {
