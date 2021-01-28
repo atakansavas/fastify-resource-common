@@ -13,6 +13,10 @@ const FrRepo = {
       document['_id'] = ObjectId();
     }
 
+    if (document.user_id) {
+      document['user_id'] = ObjectId(document.user_id);
+    }
+
     const metaObject = {
       created_at: unix,
       created_at_string: moment.unix(unix).format(),
