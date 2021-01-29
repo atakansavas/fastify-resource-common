@@ -18,7 +18,7 @@ module.exports = class FrApi {
     this.tableName = tableName;
     this.service = service || 'fr';
     this.authMethod = authMethod;
-    this.isUseMeService = methods.includes('ME');
+    this.isUseMeService = methods.includes('PARTIAL');
   }
 
   generateUrls() {
@@ -28,7 +28,7 @@ module.exports = class FrApi {
       update: this.routePrefix + '/:resourceId',
       delete: this.routePrefix + '/:resourceId',
       query: this.routePrefix + '/_query',
-      me: this.routePrefix,
+      partial: this.routePrefix + '/_partial',
     };
   }
 
@@ -105,9 +105,9 @@ module.exports = class FrApi {
       );
     }
 
-    if (this.methods.includes('ME')) {
+    if (this.methods.includes('PARTIAL')) {
       this.fastify.post(
-        urls.me,
+        urls.partial,
         {
           schema: {
             tags: [this.tableName],
