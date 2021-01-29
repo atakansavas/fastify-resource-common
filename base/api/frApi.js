@@ -125,7 +125,7 @@ module.exports = class FrApi {
             this.opts.db
           );
 
-          let _where = request.body.where || {};
+          let _where = request.body?.where || {};
 
           let where = {
             ..._where,
@@ -133,10 +133,10 @@ module.exports = class FrApi {
             status: true,
           };
 
-          let select = request.body.select || {};
-          let limit = parseInt(request.body.limit) || 50;
-          let page = parseInt(request.body.page) || 0;
-          let sort = request.body.sort || { _id: 1 };
+          let select = request.body?.select || {};
+          let limit = parseInt(request.body?.limit) || 50;
+          let page = parseInt(request.body?.page) || 0;
+          let sort = request.body?.sort || { _id: 1 };
 
           let result = await this.service.filter({
             db: this.opts.db,
