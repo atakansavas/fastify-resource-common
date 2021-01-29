@@ -125,18 +125,25 @@ module.exports = class FrApi {
             this.opts.db
           );
 
-          let _where = request.body?.where || {};
+          let _where = {};
+          let select = {};
+          let limit = 50;
+          let page = 0;
+          let sort = { _id: 1 };
+
+          if (request.body) {
+            _where = request.body.where || {};
+            select = request.body.select || {};
+            limit = parseInt(request.body.limit) || 50;
+            page = parseInt(request.body.page) || 0;
+            sort = request.body.sort || { _id: 1 };
+          }
 
           let where = {
             ..._where,
             user_id: user._id,
             status: true,
           };
-
-          let select = request.body?.select || {};
-          let limit = parseInt(request.body?.limit) || 50;
-          let page = parseInt(request.body?.page) || 0;
-          let sort = request.body?.sort || { _id: 1 };
 
           let result = await this.service.filter({
             db: this.opts.db,
