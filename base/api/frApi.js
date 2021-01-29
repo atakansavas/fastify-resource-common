@@ -106,7 +106,7 @@ module.exports = class FrApi {
     }
 
     if (this.methods.includes('ME')) {
-      this.fastify.get(
+      this.fastify.post(
         urls.me,
         {
           schema: {
@@ -125,15 +125,18 @@ module.exports = class FrApi {
             this.opts.db
           );
 
+          let _where = request.body.where || {};
+
           let where = {
+            ..._where,
             user_id: user._id,
             status: true,
           };
 
-          const select = {};
-          let limit = 50;
-          let page = 0;
-          let sort = { _id: 1 };
+          let select = request.body.select || {};
+          let limit = parseInt(request.body.limit) || 50;
+          let page = parseInt(request.body.page) || 0;
+          let sort = request.body.sort || { _id: 1 };
 
           let result = await this.service.filter({
             db: this.opts.db,

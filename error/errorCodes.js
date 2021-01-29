@@ -14,6 +14,7 @@ const errorCodes = {
   DisallowEmailUpdate: 'errors.disallowEmailUpdate',
   TokenInvalid: 'errors.InvalidToken',
   RequestError: 'errors.RequestError',
+  ServerError: 'errors.internalServerError',
 };
 
 module.exports = errorCodes;
