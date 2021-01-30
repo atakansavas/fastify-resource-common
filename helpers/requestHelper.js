@@ -4,10 +4,6 @@ const axios = require('axios');
 
 class RequestHelper {
   constructor(token, _baseUrl) {
-    if (process.env.KEEPLOGS == 1) {
-      console.info('REQUEST INITIAL', token, _baseUrl);
-    }
-
     this.baseUrl = _baseUrl;
     let service = axios.create({
       headers: {
