@@ -61,7 +61,7 @@ class RequestHelper {
     });
   }
 
-  put(path, payload) {
+  update(path, payload) {
     if (process.env.KEEPLOGS == 1) {
       console.info('REQUEST => PUT', this.baseUrl + path, payload);
     }
