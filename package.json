@@ -1,6 +1,6 @@
 {
   "name": "@atakansavas/fastify-resource-common",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "nodejs fastify api resource api common",
   "main": "index.js",
   "publishConfig": {
@@ -19,8 +19,9 @@
   "dependencies": {
     "ajv": "^6.5.5",
     "axios": "^0.20.0",
+    "dotenv": "^6.1.0",
+    "enum": "^3.0.4",
     "moment": "^2.29.1",
-    "mongodb": "^3.6.3",
-    "dotenv": "^6.1.0"
+    "mongodb": "^3.6.3"
   }
 }

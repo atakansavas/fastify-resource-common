@@ -10,6 +10,7 @@ const Zones = require('./settings/zones');
 const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
 const AddressTypes = require('./addressTypes');
+const UserTypes = require('./userTypes');
 
 module.exports = {
   Groups,
@@ -23,4 +24,5 @@ module.exports = {
   DurationPrices,
   DistancePrices,
   SidePrices,
+  UserTypes,
 };

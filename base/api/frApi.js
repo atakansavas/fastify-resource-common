@@ -16,6 +16,7 @@ module.exports = class FrApi {
     this.opts = opts;
     this.routePrefix = '' + routePrefix;
     this.methods = methods;
+    this.methodsList = methods.map((item) => item.Method);
     this.tableName = tableName;
     this.service = service || 'fr';
     this.authMethod = authMethod;
@@ -279,10 +280,6 @@ module.exports = class FrApi {
             this.opts.secret,
             this.opts.db
           );
-
-          if (!!request.body._id) {
-            throw new Error('Id column shouldnt update.');
-          }
 
           let providedBody = request.body;
           let resourceId = request.params.resourceId;
