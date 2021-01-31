@@ -1,5 +1,6 @@
 const Utilities = require('../../helpers/utilities');
 const statusCodes = require('./statusCodes');
+const agentSchema = require('../../models/agent');
 
 module.exports = class FrApi {
   constructor(
@@ -218,7 +219,10 @@ module.exports = class FrApi {
         {
           schema: {
             tags: [this.tableName],
-            body: this.clearSchemas(createValidationSchema),
+            body: {
+              ...this.clearSchemas(createValidationSchema),
+              agent: agentSchema,
+            },
           },
         },
         async (request, reply) => {
@@ -258,7 +262,10 @@ module.exports = class FrApi {
         {
           schema: {
             tags: [this.tableName],
-            body: this.clearSchemas(createValidationSchema),
+            body: {
+              ...this.clearSchemas(createValidationSchema),
+              agent: agentSchema,
+            },
             response: {
               201: createValidationSchema,
             },
