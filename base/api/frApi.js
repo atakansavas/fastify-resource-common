@@ -280,6 +280,10 @@ module.exports = class FrApi {
             this.opts.db
           );
 
+          if (!!request.body._id) {
+            throw new Error('Id column shouldnt update.');
+          }
+
           let providedBody = request.body;
           let resourceId = request.params.resourceId;
 
