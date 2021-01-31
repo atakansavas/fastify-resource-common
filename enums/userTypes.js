@@ -2,15 +2,15 @@ const Enum = require('enum');
 
 module.exports = new Enum({
   User: {
-    type: 1,
-    tokenExpireDayCount: 30,
+    Id: 1,
+    TokenExpireDayCount: 30,
   },
   Courier: {
-    type: 2,
-    tokenExpireDayCount: 30,
+    Id: 2,
+    TokenExpireDayCount: 30,
   },
   Admin: {
-    type: 3,
-    tokenExpireDayCount: 2,
+    Id: 3,
+    TokenExpireDayCount: 5,
   },
 });
