@@ -45,62 +45,64 @@ module.exports = class FrApi {
     const urls = this.generateUrls();
 
     console.info(this.routePrefix + ' resource initialized on', this.methods);
+    const methodList = this.methods.map((item) => item.Method);
+    const GET = this.methods.find((item) => item.Method == 'GET');
+    const POST = this.methods.find((item) => item.Method == 'POST');
+    const PUT = this.methods.find((item) => item.Method == 'PUT');
+    const DELETE = this.methods.find((item) => item.Method == 'DELETE');
+    const QUERY = this.methods.find((item) => item.Method == 'QUERY');
+    const PARTIAL = this.methods.find((item) => item.Method == 'PARTIAL');
 
-    for (let index = 0; index < this.methods.length; index++) {
-      const methodDetails = this.methods[index];
-      const schema = {
-        tags: [this.tableName],
-        summary: methodDetails.Description,
-      };
-
-      if (methodDetails.Method == 'QUERY') {
-        this.fastify.post(
-          urls.query,
-          {
-            schema: { ...schema },
+    if (QUERY) {
+      this.fastify.post(
+        urls.query,
+        {
+          schema: {
+            tags: [this.tableName],
+            summary: QUERY.Description,
           },
-          async (request, reply) => {
-            const authHeader = request.headers.authorization || null;
-            const user = await this.authMethod(
-              authHeader,
-              this.opts.secret,
-              this.opts.db
+        },
+        async (request, reply) => {
+          let authHeader = request.headers.authorization || null;
+          const user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
+
+          let where = request.body.where || {};
+          let select = request.body.select || {};
+          let limit = parseInt(request.body.limit) || 50;
+          let page = parseInt(request.body.page) || 0;
+          let sort = request.body.sort || { _id: 1 };
+
+          let result = await this.service.filter({
+            db: this.opts.db,
+            where: where,
+            select: select,
+            limit: limit,
+            page: page,
+            sort: sort,
+            tableName: this.tableName,
+            user: user,
+            token: authHeader,
+          });
+
+          let _response = [];
+          for (let document of result.items) {
+            let _document = Utilities.runReadFormatter(
+              readFormatters,
+              document
             );
-
-            let where = request.body.where || {};
-            let select = request.body.select || {};
-            let limit = parseInt(request.body.limit) || 50;
-            let page = parseInt(request.body.page) || 0;
-            let sort = request.body.sort || { _id: 1 };
-
-            let result = await this.service.filter({
-              db: this.opts.db,
-              where: where,
-              select: select,
-              limit: limit,
-              page: page,
-              sort: sort,
-              tableName: this.tableName,
-              user: user,
-              token: authHeader,
-            });
-
-            let _response = [];
-            for (let document of result.items) {
-              let _document = Utilities.runReadFormatter(
-                readFormatters,
-                document
-              );
-              _response.push(_document);
-            }
-
-            reply.code(statusCodes.QUERY).send({
-              items: _response,
-              totalCount: result.count,
-            });
+            _response.push(_document);
           }
-        );
-      }
+
+          reply.code(statusCodes.QUERY).send({
+            items: _response,
+            totalCount: result.count,
+          });
+        }
+      );
     }
 
     // if (this.methods.includes('QUERY')) {
