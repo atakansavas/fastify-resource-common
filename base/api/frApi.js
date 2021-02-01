@@ -4,7 +4,15 @@ const agentSchema = require('../../models/agent');
 const service = require('../service/frService');
 
 module.exports = class FrApi {
-  constructor(fastify, opts, routePrefix, methods, tableName, authMethod) {
+  constructor(
+    fastify,
+    opts,
+    routePrefix,
+    methods,
+    tableName,
+    service,
+    authMethod
+  ) {
     this.fastify = fastify;
     this.opts = opts;
     this.routePrefix = '' + routePrefix;
