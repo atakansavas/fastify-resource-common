@@ -44,7 +44,9 @@ module.exports = class FrApi {
   } = {}) {
     const urls = this.generateUrls();
 
-    console.info(this.routePrefix + ' resource initialized on', this.methods);
+    const methodsList = this.methods.map((item) => item.Method);
+    console.info(this.routePrefix + ' resource initialized on', methodsList);
+
     const methodList = this.methods.map((item) => item.Method);
     const GET = this.methods.find((item) => item.Method == 'GET');
     const POST = this.methods.find((item) => item.Method == 'POST');
@@ -105,286 +107,238 @@ module.exports = class FrApi {
       );
     }
 
-    // if (this.methods.includes('QUERY')) {
-    //   const queryMethodDetails = this.methodsList.find((item) => item.Method == "QUERY");
-    //   this.fastify.post(
-    //     urls.query,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //         summary: ,
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let authHeader = request.headers.authorization || null;
-    //       const user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
+    if (PARTIAL) {
+      this.fastify.post(
+        urls.partial,
+        {
+          schema: {
+            tags: [this.tableName],
+            summary: PARTIAL.Description,
+            response: {
+              201: createValidationSchema,
+            },
+          },
+        },
+        async (request, reply) => {
+          let user = {};
+          let authHeader = request.headers.authorization || null;
+          user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
 
-    //       let where = request.body.where || {};
-    //       let select = request.body.select || {};
-    //       let limit = parseInt(request.body.limit) || 50;
-    //       let page = parseInt(request.body.page) || 0;
-    //       let sort = request.body.sort || { _id: 1 };
+          let _where = {};
+          let select = {};
+          let limit = 50;
+          let page = 0;
+          let sort = { _id: 1 };
 
-    //       let result = await this.service.filter({
-    //         db: this.opts.db,
-    //         where: where,
-    //         select: select,
-    //         limit: limit,
-    //         page: page,
-    //         sort: sort,
-    //         tableName: this.tableName,
-    //         user: user,
-    //         token: authHeader,
-    //       });
+          if (request.body) {
+            _where = request.body.where || {};
+            select = request.body.select || {};
+            limit = parseInt(request.body.limit) || 50;
+            page = parseInt(request.body.page) || 0;
+            sort = request.body.sort || { _id: 1 };
+          }
 
-    //       let _response = [];
-    //       for (let document of result.items) {
-    //         let _document = Utilities.runReadFormatter(
-    //           readFormatters,
-    //           document
-    //         );
-    //         _response.push(_document);
-    //       }
+          let where = {
+            ..._where,
+            user_id: user._id,
+            status: true,
+          };
 
-    //       reply.code(statusCodes.QUERY).send({
-    //         items: _response,
-    //         totalCount: result.count,
-    //       });
-    //     }
-    //   );
-    // }
+          let result = await this.service.filter({
+            db: this.opts.db,
+            where: where,
+            select: select,
+            limit: limit,
+            page: page,
+            sort: sort,
+            tableName: this.tableName,
+            user: user,
+            token: authHeader,
+          });
 
-    // if (this.methods.includes('PARTIAL')) {
-    //   this.fastify.post(
-    //     urls.partial,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //         response: {
-    //           201: createValidationSchema,
-    //         },
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let user = {};
-    //       let authHeader = request.headers.authorization || null;
-    //       user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
+          let _response = [];
+          for (let document of result.items) {
+            let _document = Utilities.runReadFormatter(
+              readFormatters,
+              document
+            );
+            _response.push(_document);
+          }
 
-    //       let _where = {};
-    //       let select = {};
-    //       let limit = 50;
-    //       let page = 0;
-    //       let sort = { _id: 1 };
+          reply.code(statusCodes.QUERY).send({
+            items: _response,
+            totalCount: result.count,
+          });
+        }
+      );
+    }
 
-    //       if (request.body) {
-    //         _where = request.body.where || {};
-    //         select = request.body.select || {};
-    //         limit = parseInt(request.body.limit) || 50;
-    //         page = parseInt(request.body.page) || 0;
-    //         sort = request.body.sort || { _id: 1 };
-    //       }
+    if (GET) {
+      this.fastify.get(
+        urls.read,
+        {
+          schema: {
+            tags: [this.tableName],
+            summary: GET.Description,
+            response: {
+              201: createValidationSchema,
+            },
+          },
+        },
+        async (request, reply) => {
+          let user = {};
+          let authHeader = request.headers.authorization || null;
+          user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
 
-    //       let where = {
-    //         ..._where,
-    //         user_id: user._id,
-    //         status: true,
-    //       };
+          let resourceId = request.params.resourceId;
 
-    //       let result = await this.service.filter({
-    //         db: this.opts.db,
-    //         where: where,
-    //         select: select,
-    //         limit: limit,
-    //         page: page,
-    //         sort: sort,
-    //         tableName: this.tableName,
-    //         user: user,
-    //         token: authHeader,
-    //       });
+          let document = await this.service.read({
+            db: this.opts.db,
+            id: resourceId,
+            tableName: this.tableName,
+            user: user,
+          });
 
-    //       let _response = [];
-    //       for (let document of result.items) {
-    //         let _document = Utilities.runReadFormatter(
-    //           readFormatters,
-    //           document
-    //         );
-    //         _response.push(_document);
-    //       }
+          document = await Utilities.runReadFormatter(readFormatters, document);
 
-    //       reply.code(statusCodes.QUERY).send({
-    //         items: _response,
-    //         totalCount: result.count,
-    //       });
-    //     }
-    //   );
-    // }
+          // document = Utilities.hideSystemProps(document);
 
-    // if (this.methods.includes('GET')) {
-    //   this.fastify.get(
-    //     urls.read,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //         response: {
-    //           201: createValidationSchema,
-    //         },
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let user = {};
-    //       let authHeader = request.headers.authorization || null;
-    //       user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
+          reply.code(statusCodes.READ).send(document);
+        }
+      );
+    }
 
-    //       let resourceId = request.params.resourceId;
+    if (POST) {
+      this.fastify.post(
+        urls.create,
+        {
+          schema: {
+            tags: [this.tableName],
+            summary: POST.Description,
+            body: {
+              ...this.clearSchemas(createValidationSchema),
+              agent: agentSchema,
+            },
+          },
+        },
+        async (request, reply) => {
+          let authHeader = request.headers.authorization || null;
+          var user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
 
-    //       let document = await this.service.read({
-    //         db: this.opts.db,
-    //         id: resourceId,
-    //         tableName: this.tableName,
-    //         user: user,
-    //       });
+          let providedBody = request.body;
 
-    //       document = await Utilities.runReadFormatter(readFormatters, document);
+          let document = await this.service.create({
+            db: this.opts.db,
+            body: providedBody,
+            schema: createValidationSchema,
+            beforeCreate: beforeCreate,
+            afterCreate: afterCreate,
+            tableName: this.tableName,
+            user,
+            isUseMeService: this.isUseMeService,
+            token: authHeader,
+          });
+          const formattedDocument = await Utilities.runReadFormatter(
+            readFormatters,
+            document
+          );
 
-    //       // document = Utilities.hideSystemProps(document);
+          reply.code(statusCodes.CREATE).send(formattedDocument);
+        }
+      );
+    }
 
-    //       reply.code(statusCodes.READ).send(document);
-    //     }
-    //   );
-    // }
+    if (PUT) {
+      this.fastify.put(
+        urls.update,
+        {
+          schema: {
+            tags: [this.tableName],
+            summary: PUT.Description,
+            body: {
+              ...this.clearSchemas(createValidationSchema),
+              agent: agentSchema,
+            },
+            response: {
+              201: createValidationSchema,
+            },
+          },
+        },
+        async (request, reply) => {
+          let user = {};
+          let authHeader = request.headers.authorization || null;
+          user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
 
-    // if (this.methods.includes('POST')) {
-    //   this.fastify.post(
-    //     urls.create,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //         body: {
-    //           ...this.clearSchemas(createValidationSchema),
-    //           agent: agentSchema,
-    //         },
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let authHeader = request.headers.authorization || null;
-    //       var user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
+          let providedBody = request.body;
+          let resourceId = request.params.resourceId;
 
-    //       let providedBody = request.body;
+          let document = await this.service.update({
+            db: this.opts.db,
+            _id: resourceId,
+            body: providedBody,
+            schema: updateValidationSchema,
+            beforeUpdate: beforeUpdate,
+            afterUpdate: afterUpdate,
+            tableName: this.tableName,
+            user: user,
+            token: authHeader,
+          });
 
-    //       let document = await this.service.create({
-    //         db: this.opts.db,
-    //         body: providedBody,
-    //         schema: createValidationSchema,
-    //         beforeCreate: beforeCreate,
-    //         afterCreate: afterCreate,
-    //         tableName: this.tableName,
-    //         user,
-    //         isUseMeService: this.isUseMeService,
-    //         token: authHeader,
-    //       });
-    //       const formattedDocument = await Utilities.runReadFormatter(
-    //         readFormatters,
-    //         document
-    //       );
+          document = await Utilities.runReadFormatter(readFormatters, document);
 
-    //       reply.code(statusCodes.CREATE).send(formattedDocument);
-    //     }
-    //   );
-    // }
+          reply.code(statusCodes.UPDATE).send(document);
+        }
+      );
+    }
 
-    // if (this.methods.includes('PUT')) {
-    //   this.fastify.put(
-    //     urls.update,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //         body: {
-    //           ...this.clearSchemas(createValidationSchema),
-    //           agent: agentSchema,
-    //         },
-    //         response: {
-    //           201: createValidationSchema,
-    //         },
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let user = {};
-    //       let authHeader = request.headers.authorization || null;
-    //       user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
+    if (DELETE) {
+      this.fastify.delete(
+        urls.delete,
+        {
+          schema: {
+            summary: DELETE.Description,
+            tags: [this.tableName],
+          },
+        },
+        async (request, reply) => {
+          let authHeader = request.headers.authorization || null;
+          var user = await this.authMethod(
+            authHeader,
+            this.opts.secret,
+            this.opts.db
+          );
 
-    //       let providedBody = request.body;
-    //       let resourceId = request.params.resourceId;
+          let resourceId = request.params.resourceId;
 
-    //       let document = await this.service.update({
-    //         db: this.opts.db,
-    //         _id: resourceId,
-    //         body: providedBody,
-    //         schema: updateValidationSchema,
-    //         beforeUpdate: beforeUpdate,
-    //         afterUpdate: afterUpdate,
-    //         tableName: this.tableName,
-    //         user: user,
-    //         token: authHeader,
-    //       });
+          await this.service.delete({
+            db: this.opts.db,
+            _id: resourceId,
+            beforeDelete: beforeDelete,
+            afterDelete: afterDelete,
+            tableName: this.tableName,
+            user: user,
+            token: authHeader,
+          });
 
-    //       document = await Utilities.runReadFormatter(readFormatters, document);
-
-    //       reply.code(statusCodes.UPDATE).send(document);
-    //     }
-    //   );
-    // }
-
-    // if (this.methods.includes('DELETE')) {
-    //   this.fastify.delete(
-    //     urls.delete,
-    //     {
-    //       schema: {
-    //         tags: [this.tableName],
-    //       },
-    //     },
-    //     async (request, reply) => {
-    //       let authHeader = request.headers.authorization || null;
-    //       var user = await this.authMethod(
-    //         authHeader,
-    //         this.opts.secret,
-    //         this.opts.db
-    //       );
-
-    //       let resourceId = request.params.resourceId;
-
-    //       await this.service.delete({
-    //         db: this.opts.db,
-    //         _id: resourceId,
-    //         beforeDelete: beforeDelete,
-    //         afterDelete: afterDelete,
-    //         tableName: this.tableName,
-    //         user: user,
-    //         token: authHeader,
-    //       });
-
-    //       reply.code(statusCodes.DELETE).send();
-    //     }
-    //   );
-    // }
+          reply.code(statusCodes.DELETE).send();
+        }
+      );
+    }
   }
 };
