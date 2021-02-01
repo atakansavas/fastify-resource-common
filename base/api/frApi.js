@@ -46,8 +46,8 @@ module.exports = class FrApi {
 
     console.info(this.routePrefix + ' resource initialized on', this.methods);
 
-    for (let index = 0; index < methodsList.length; index++) {
-      const methodDetails = methodsList[index];
+    for (let index = 0; index < methods.length; index++) {
+      const methodDetails = methods[index];
       const schema = {
         tags: [this.tableName],
         summary: methodDetails.Description,
