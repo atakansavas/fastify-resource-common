@@ -15,6 +15,7 @@ const errorCodes = {
   TokenInvalid: 'errors.InvalidToken',
   RequestError: 'errors.RequestError',
   ServerError: 'errors.internalServerError',
+  Unauthorized: 'errors.unauthorizedProcess',
 };
 
 module.exports = errorCodes;

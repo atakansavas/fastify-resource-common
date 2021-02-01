@@ -2,6 +2,8 @@ const Utilities = require('../../helpers/utilities');
 const statusCodes = require('./statusCodes');
 const agentSchema = require('../../models/agent');
 const service = require('../service/frService');
+const frError = require('../../error/frError');
+const ErrorCodes = require('../../error/errorCodes');
 
 module.exports = class FrApi {
   constructor(
@@ -80,6 +82,14 @@ module.exports = class FrApi {
             this.opts.db
           );
 
+          if (!QUERY.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
+
           let where = request.body.where || {};
           let select = request.body.select || {};
           let limit = parseInt(request.body.limit) || 50;
@@ -135,6 +145,14 @@ module.exports = class FrApi {
             this.opts.secret,
             this.opts.db
           );
+
+          if (!PARTIAL.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
 
           let _where = {};
           let select = {};
@@ -206,6 +224,14 @@ module.exports = class FrApi {
             this.opts.db
           );
 
+          if (!GET.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
+
           let resourceId = request.params.resourceId;
 
           let document = await this.service.read({
@@ -244,6 +270,14 @@ module.exports = class FrApi {
             this.opts.secret,
             this.opts.db
           );
+
+          if (!POST.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
 
           let providedBody = request.body;
 
@@ -293,6 +327,14 @@ module.exports = class FrApi {
             this.opts.db
           );
 
+          if (!PUT.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
+
           let providedBody = request.body;
           let resourceId = request.params.resourceId;
 
@@ -331,6 +373,14 @@ module.exports = class FrApi {
             this.opts.secret,
             this.opts.db
           );
+
+          if (!DELETE.UserTypes.includes(user.userType)) {
+            throw new frError({
+              message: 'Unauthorized process.',
+              code: ErrorCodes.Unauthorized,
+              status: 403,
+            });
+          }
 
           let resourceId = request.params.resourceId;
 
