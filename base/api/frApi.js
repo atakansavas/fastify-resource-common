@@ -22,7 +22,7 @@ module.exports = class FrApi {
     this.tableName = tableName;
     this.service = service;
     this.authMethod = authMethod;
-    this.isUseMeService = methods.includes('PARTIAL');
+    this.isUseMeService = false;
   }
 
   generateUrls() {
@@ -64,6 +64,10 @@ module.exports = class FrApi {
     const DELETE = this.methods.find((item) => item.Method == 'DELETE');
     const QUERY = this.methods.find((item) => item.Method == 'QUERY');
     const PARTIAL = this.methods.find((item) => item.Method == 'PARTIAL');
+
+    if (PARTIAL) {
+      this.isUseMeService = true;
+    }
 
     if (QUERY) {
       this.fastify.post(
