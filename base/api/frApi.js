@@ -57,7 +57,6 @@ module.exports = class FrApi {
     const methodsList = this.methods.map((item) => item.Method);
     console.info(this.routePrefix + ' resource initialized on', methodsList);
 
-    const methodList = this.methods.map((item) => item.Method);
     const GET = this.methods.find((item) => item.Method == 'GET');
     const POST = this.methods.find((item) => item.Method == 'POST');
     const PUT = this.methods.find((item) => item.Method == 'PUT');
@@ -174,7 +173,7 @@ module.exports = class FrApi {
 
           let where = {
             ..._where,
-            user_id: user._id,
+            user_id: user._id.toString(),
             status: true,
           };
 

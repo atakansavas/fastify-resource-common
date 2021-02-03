@@ -1,10 +1,16 @@
-const Enum = require('../base/enum/index');
+const Enum = require('enum');
 
-const SettingGroups = new Enum({
-  Km: '1',
-  Side: '2',
-  Distance: '3',
-  Zone: '4',
+module.exports = new Enum({
+  Km: {
+    Id: 1,
+  },
+  Side: {
+    Id: 2,
+  },
+  Distance: {
+    Id: 3,
+  },
+  Zone: {
+    Id: 4,
+  },
 });
-
-module.exports = SettingGroups;
