@@ -61,7 +61,7 @@ const FrService = {
     let resource = body;
 
     if (isUseMeService) {
-      resource.user_id = user._id;
+      resource.user_id = user._id.toString();
     }
 
     if (beforeCreate !== []) {
