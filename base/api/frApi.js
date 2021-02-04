@@ -78,6 +78,9 @@ module.exports = class FrApi {
           },
         },
         async (request, reply) => {
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.query + ' METHOD INIT : ', request);
+          }
           let authHeader = request.headers.authorization || null;
           const user = await this.authMethod(
             authHeader,
@@ -120,6 +123,13 @@ module.exports = class FrApi {
             _response.push(_document);
           }
 
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.query + ' METHOD RESPONSE : ', {
+              items: _response,
+              totalCount: result.count,
+            });
+          }
+
           reply.code(statusCodes.QUERY).send({
             items: _response,
             totalCount: result.count,
@@ -141,6 +151,9 @@ module.exports = class FrApi {
           },
         },
         async (request, reply) => {
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.partial + ' METHOD INIT : ', request);
+          }
           let user = {};
           let authHeader = request.headers.authorization || null;
           user = await this.authMethod(
@@ -196,6 +209,13 @@ module.exports = class FrApi {
               document
             );
             _response.push(_document);
+          }
+
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.partial + ' METHOD RESPONSE : ', {
+              items: _response,
+              totalCount: result.count,
+            });
           }
 
           reply.code(statusCodes.QUERY).send({
@@ -267,6 +287,9 @@ module.exports = class FrApi {
           },
         },
         async (request, reply) => {
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.create + ' METHOD INIT : ', request);
+          }
           let authHeader = request.headers.authorization || null;
           var user = await this.authMethod(
             authHeader,
@@ -300,6 +323,10 @@ module.exports = class FrApi {
             document
           );
 
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.create + ' METHOD RESPONSE : ', formattedDocument);
+          }
+
           reply.code(statusCodes.CREATE).send(formattedDocument);
         }
       );
@@ -322,6 +349,9 @@ module.exports = class FrApi {
           },
         },
         async (request, reply) => {
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.update + ' METHOD INIT : ', request);
+          }
           let user = {};
           let authHeader = request.headers.authorization || null;
           user = await this.authMethod(
@@ -355,6 +385,9 @@ module.exports = class FrApi {
 
           document = await Utilities.runReadFormatter(readFormatters, document);
 
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.update + ' METHOD RESPONSE : ', document);
+          }
           reply.code(statusCodes.UPDATE).send(document);
         }
       );
@@ -370,6 +403,9 @@ module.exports = class FrApi {
           },
         },
         async (request, reply) => {
+          if (process.env.KEEPLOGS == 1) {
+            console.log(urls.delete + ' METHOD INIT : ', request);
+          }
           let authHeader = request.headers.authorization || null;
           var user = await this.authMethod(
             authHeader,
