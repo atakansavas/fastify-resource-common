@@ -1,18 +1,28 @@
-const Enum = require('../base/enum/index');
+const Enum = require('enum');
 
-const SettingGroups = new Enum({
-  //* Sistem ayarlari icin
-  System: '1',
-  //* Paket tipi
-  PackageType: '2',
-  //* Arac tiplero
-  VehicleType: '3',
-  //* Zone ucretleri
-  ZonePrices: '4',
-  //* Mesafe ucretleri
-  DistancePrices: '5',
-  //* Yaka ucretleri
-  SidePrices: '6',
+module.exports = new Enum({
+  System: {
+    Id: 1,
+    Title: 'Sistem Ayarları',
+  },
+  PackageType: {
+    Id: 2,
+    Title: 'Paket Tipleri',
+  },
+  VehicleType: {
+    Id: 3,
+    Title: 'Araç Tipleri',
+  },
+  ZonePrices: {
+    Id: 4,
+    Title: 'Bölge Ayarları',
+  },
+  DistancePrices: {
+    Id: 5,
+    Title: 'Mesafe Ayarları',
+  },
+  SidePrices: {
+    Id: 6,
+    Title: 'Yaka Fiyatları',
+  },
 });
-
-module.exports = SettingGroups;
