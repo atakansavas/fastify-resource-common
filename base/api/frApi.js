@@ -184,9 +184,9 @@ module.exports = class FrApi {
             sort = request.body.sort || { _id: 1 };
           }
 
-          _where = {
+          let where = {
             $and: [
-              { ...where },
+              { ..._where },
               { status: true },
               { $or: [{ parent_id: user._id }, { user_id: user._id }] },
             ],
