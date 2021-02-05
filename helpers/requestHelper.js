@@ -2,17 +2,18 @@ const frError = require('../error/frError');
 const ErrorCodes = require('../error/errorCodes');
 const axios = require('axios');
 
-class RequestHelper {
+module.exports = class RequestHelper {
   constructor(token, _baseUrl) {
-    this.baseUrl = _baseUrl;
     let service = axios.create({
       headers: {
-        csrf: 'token',
         Authorization: token,
       },
     });
     service.interceptors.response.use(this.handleSuccess, this.handleError);
+
     this.service = service;
+    this.baseUrl = _baseUrl;
+    this.token = token;
   }
 
   handleSuccess(response) {
@@ -40,11 +41,16 @@ class RequestHelper {
       console.info('REQUEST => GET', this.baseUrl + path);
     }
     return new Promise((resolve, reject) => {
-      resolve(
-        this.service.get(this.baseUrl + path).then((response) => {
-          return response.data;
+      this.service
+        .get(this.baseUrl + path)
+        .then((resp) => {
+          resolve(resp.data);
+          console.log(resp.data);
         })
-      );
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
     });
   }
 
@@ -53,11 +59,16 @@ class RequestHelper {
       console.info('REQUEST => POST', this.baseUrl + path, payload);
     }
     return new Promise((resolve, reject) => {
-      resolve(
-        this.service.post(this.baseUrl + path, payload).then((response) => {
-          return response.data;
+      this.service
+        .post(this.baseUrl + path, payload)
+        .then((resp) => {
+          resolve(resp.data);
+          console.log(resp.data);
         })
-      );
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
     });
   }
 
@@ -66,13 +77,16 @@ class RequestHelper {
       console.info('REQUEST => PUT', this.baseUrl + path, payload);
     }
     return new Promise((resolve, reject) => {
-      resolve(
-        this.service.put(this.baseUrl + path, payload).then((response) => {
-          return response.data;
+      this.service
+        .put(this.baseUrl + path, payload)
+        .then((resp) => {
+          resolve(resp.data);
+          console.log(resp.data);
         })
-      );
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
     });
   }
-}
-
-module.exports = RequestHelper;
+};
