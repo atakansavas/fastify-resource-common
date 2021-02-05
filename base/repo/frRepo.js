@@ -15,6 +15,9 @@ const FrRepo = {
 
     if (document.user_id) {
       document['user_id'] = ObjectId(document.user_id);
+    }
+
+    if (document.parent_id) {
       document['parent_id'] = ObjectId(document.parent_id);
     }
 
