@@ -58,6 +58,10 @@ const utilities = {
       where['user_id'] = utilities.makeObjectId(where['user_id']);
     }
 
+    if (where['parent_id']) {
+      where['parent_id'] = utilities.makeObjectId(where['parent_id']);
+    }
+
     if (where['_meta.user_id']) {
       where['_meta.user_id'] = utilities.makeObjectId(where['_meta.user_id']);
     }

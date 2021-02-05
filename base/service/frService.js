@@ -62,6 +62,7 @@ const FrService = {
 
     if (isUseMeService) {
       resource.user_id = user._id.toString();
+      resource.parent_id = user.parent.parentId.toString();
     }
 
     if (beforeCreate !== []) {

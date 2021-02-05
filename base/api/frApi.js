@@ -185,9 +185,11 @@ module.exports = class FrApi {
           }
 
           let where = {
-            ..._where,
-            user_id: user._id.toString(),
-            status: true,
+            $and: [
+              { ...where },
+              { status: true },
+              { $or: [{ parent_id: user._id }, { user_id: user._id }] },
+            ],
           };
 
           let result = await this.service.filter({
