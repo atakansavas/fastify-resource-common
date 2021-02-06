@@ -97,7 +97,9 @@ const utilities = {
       };
     });
 
-    keysWithoutOr.push({ $or: where['$or'] });
+    keysWithoutOr.push({
+      $or: utilities.normalizeIds(where['$or']),
+    });
 
     let normalizedWhere = utilities.normalizeIds(keysWithoutOr);
     return whereClause;
