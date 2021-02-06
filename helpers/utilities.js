@@ -87,8 +87,27 @@ const utilities = {
     return where;
   },
   preProcessWhere: (where) => {
-    let normalizedWhere = utilities.normalizeIds(where);
-    return normalizedWhere;
+    const keysWithoutOr = Object.keys(normalizedWhere).map((item) => {
+      if (item.indexOf('$or') < 0) {
+        return {
+          [item]: normalizedWhere[item],
+        };
+      }
+    });
+
+    let normalizedWhere = utilities.normalizeIds(keysWithoutOr);
+    let whereClause = { $and: [...normalizedWhere] };
+
+    if (where['$or']) {
+      const orKeys = where['$or'];
+      let orClause = orKeys.forEach((item) => {
+        return normalizedWhere(item);
+      });
+
+      whereClause['$and'] = { ...whereClause['$and'], $or: orClause };
+    }
+
+    return whereClause;
   },
   runFunctionPool: async (functions, params) => {
     let resource = params.resource;
