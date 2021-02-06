@@ -87,15 +87,21 @@ const utilities = {
     return where;
   },
   preProcessWhere: (where) => {
-    const keysWithoutOr = Object.keys(where).filter((item) => {
-      if (item.indexOf('$or') < 0) {
-        return {
-          [item]: where[item],
-        };
-      }
+    const objectWithoutOr = Object.keys(where).filter(
+      (item) => !item.includes('$or')
+    );
+
+    const keysWithoutOr = Object.keys(objectWithoutOr).map((item) => {
+      return {
+        [item]: where[item],
+      };
     });
 
+    keysWithoutOr.push({ $or: where['$or'] });
+
     let normalizedWhere = utilities.normalizeIds(keysWithoutOr);
+    return whereClause;
+
     let whereClause = { $and: [...normalizedWhere] };
 
     if (where['$or']) {
