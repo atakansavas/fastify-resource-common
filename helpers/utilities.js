@@ -87,7 +87,7 @@ const utilities = {
     return where;
   },
   preProcessWhere: (where) => {
-    const keysWithoutOr = Object.keys(where).map((item) => {
+    const keysWithoutOr = Object.keys(where).filter((item) => {
       if (item.indexOf('$or') < 0) {
         return {
           [item]: where[item],
