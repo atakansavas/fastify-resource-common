@@ -91,7 +91,7 @@ const utilities = {
       (item) => !item.includes('$or')
     );
 
-    const keysWithoutOr = Object.keys(objectWithoutOr).map((item) => {
+    const keysWithoutOr = objectWithoutOr.map((item) => {
       return {
         [item]: where[item],
       };
