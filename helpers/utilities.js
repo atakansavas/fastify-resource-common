@@ -113,20 +113,20 @@ const utilities = {
     });
 
     let normalizedWhere = utilities.normalizeIds(keysWithoutOr);
-    return whereClause;
+    return normalizedWhere;
 
-    let whereClause = { $and: [...normalizedWhere] };
+    // let whereClause = { $and: [...normalizedWhere] };
 
-    if (where['$or']) {
-      const orKeys = where['$or'];
-      let orClause = orKeys.forEach((item) => {
-        return utilities.normalizedWhere(item);
-      });
+    // if (where['$or']) {
+    //   const orKeys = where['$or'];
+    //   let orClause = orKeys.forEach((item) => {
+    //     return utilities.normalizedWhere(item);
+    //   });
 
-      whereClause['$and'] = { ...whereClause['$and'], $or: orClause };
-    }
+    //   whereClause['$and'] = { ...whereClause['$and'], $or: orClause };
+    // }
 
-    return whereClause;
+    // return whereClause;
   },
   runFunctionPool: async (functions, params) => {
     let resource = params.resource;
