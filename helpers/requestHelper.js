@@ -44,8 +44,8 @@ module.exports = class RequestHelper {
       this.service
         .get(this.baseUrl + path)
         .then((resp) => {
-          resolve(resp.data);
           console.log(resp.data);
+          resolve(resp.data);
         })
         .catch((err) => {
           console.error(err);
@@ -62,8 +62,8 @@ module.exports = class RequestHelper {
       this.service
         .post(this.baseUrl + path, payload)
         .then((resp) => {
-          resolve(resp.data);
           console.log(resp.data);
+          resolve(resp.data);
         })
         .catch((err) => {
           console.error(err);
@@ -80,8 +80,8 @@ module.exports = class RequestHelper {
       this.service
         .put(this.baseUrl + path, payload)
         .then((resp) => {
-          resolve(resp.data);
           console.log(resp.data);
+          resolve(resp.data);
         })
         .catch((err) => {
           console.error(err);

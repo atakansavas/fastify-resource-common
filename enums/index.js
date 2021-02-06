@@ -11,6 +11,7 @@ const PricingTypes = require('./pricingTypes');
 const OrderTypes = require('./orderTypes');
 const AddressTypes = require('./addressTypes');
 const UserTypes = require('./userTypes');
+const OrderInputTypes = require('./orderInputTypes');
 
 module.exports = {
   Groups,
@@ -25,4 +26,5 @@ module.exports = {
   DistancePrices,
   SidePrices,
   UserTypes,
+  OrderInputTypes,
 };
