@@ -87,10 +87,10 @@ const utilities = {
     return where;
   },
   preProcessWhere: (where) => {
-    const keysWithoutOr = Object.keys(normalizedWhere).map((item) => {
+    const keysWithoutOr = Object.keys(where).map((item) => {
       if (item.indexOf('$or') < 0) {
         return {
-          [item]: normalizedWhere[item],
+          [item]: where[item],
         };
       }
     });
@@ -101,7 +101,7 @@ const utilities = {
     if (where['$or']) {
       const orKeys = where['$or'];
       let orClause = orKeys.forEach((item) => {
-        return normalizedWhere(item);
+        return utilities.normalizedWhere(item);
       });
 
       whereClause['$and'] = { ...whereClause['$and'], $or: orClause };
