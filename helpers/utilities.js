@@ -35,9 +35,20 @@ const utilities = {
     return Math.floor(Math.random() * (_max - _min) + _min); //The maximum is exclusive and the minimum is inclusive
   },
 
+  normalizeArrayIds: (where) => {
+    return where.map((item) => {
+      return utilities.normalizeIds(item);
+    });
+  },
+
   normalizeIds: (where) => {
     if (!where) {
       return where;
+    }
+
+    if (Array.isArray(where)) {
+      //* or kullanimlari icin
+      return utilities.normalizeArrayIds(where);
     }
 
     if (where['_id']) {
