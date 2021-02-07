@@ -12,6 +12,8 @@ const OrderTypes = require('./orderTypes');
 const AddressTypes = require('./addressTypes');
 const UserTypes = require('./userTypes');
 const OrderInputTypes = require('./orderInputTypes');
+const PromotionTypes = require('./promotionTypes');
+const PaymentTypes = require('./paymentTypes');
 
 module.exports = {
   Groups,
@@ -27,4 +29,6 @@ module.exports = {
   SidePrices,
   UserTypes,
   OrderInputTypes,
+  PromotionTypes,
+  PaymentTypes,
 };

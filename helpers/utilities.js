@@ -118,15 +118,6 @@ const utilities = {
 
     let whereClause = { $and: [...normalizedWhere] };
 
-    // if (where['$or']) {
-    //   const orKeys = where['$or'];
-    //   let orClause = orKeys.forEach((item) => {
-    //     return utilities.normalizedWhere(item);
-    //   });
-
-    //   whereClause['$and'] = { ...whereClause['$and'], $or: orClause };
-    // }
-
     return whereClause;
   },
   runFunctionPool: async (functions, params) => {

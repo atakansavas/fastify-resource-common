@@ -1,13 +1,13 @@
 const Enum = require('enum');
 
 module.exports = new Enum({
-  Sender: {
+  CreditCard: {
     Id: 1,
   },
-  Receiver: {
+  Balance: {
     Id: 2,
   },
-  Billing: {
+  CreditAccount: {
     Id: 3,
   },
 });
