@@ -1,5 +1,9 @@
 const Groups = require('./settingGroups');
 
+const PricingTypes = require('./pricingTypes');
+const AddressTypes = require('./addressTypes');
+const UserTypes = require('./userTypes');
+
 const System = require('./settings/systemSettings');
 const PackageTypes = require('./settings/packageTypes');
 const VehicleTypes = require('./settings/vehicleTypes');
@@ -7,14 +11,14 @@ const DurationPrices = require('./settings/durationPrices');
 const DistancePrices = require('./settings/distancePrices');
 const SidePrices = require('./settings/sidePrices');
 const Zones = require('./settings/zones');
-const PricingTypes = require('./pricingTypes');
-const OrderTypes = require('./orderTypes');
-const AddressTypes = require('./addressTypes');
-const UserTypes = require('./userTypes');
-const OrderInputTypes = require('./orderInputTypes');
-const PromotionTypes = require('./promotionTypes');
-const PaymentTypes = require('./paymentTypes');
-const PaymentStatues = require('./paymentStatues');
+
+const OrderTypes = require('./order/orderTypes');
+const OrderInputTypes = require('./order/orderInputTypes');
+
+const PromotionTypes = require('./payments/promotionTypes');
+const PaymentTypes = require('./payments/paymentTypes');
+const PaymentStatues = require('./payments/paymentStatues');
+const BalanceProcessTypes = require('./payments/balanceProcessTypes');
 
 module.exports = {
   Groups,
@@ -33,4 +37,5 @@ module.exports = {
   PromotionTypes,
   PaymentTypes,
   PaymentStatues,
+  BalanceProcessTypes,
 };

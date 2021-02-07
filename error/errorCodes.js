@@ -16,6 +16,8 @@ const errorCodes = {
   RequestError: 'errors.RequestError',
   ServerError: 'errors.internalServerError',
   Unauthorized: 'errors.unauthorizedProcess',
+  FrozenAccount: 'errors.frozenAccount',
+  CreditAccount: 'errors.creditAccount',
 };
 
 module.exports = errorCodes;
