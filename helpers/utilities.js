@@ -1,6 +1,8 @@
+const ShortId = require('id-shorter');
+const { ObjectId } = require('mongodb');
+
 const frError = require('../error/frError');
 const ErrorCodes = require('../error/errorCodes');
-const { ObjectId } = require('mongodb');
 
 const utilities = {
   capitalizeString: (string) => {
@@ -39,6 +41,13 @@ const utilities = {
     return where.map((item) => {
       return utilities.normalizeIds(item);
     });
+  },
+
+  generateUniqueNumber: () => {
+    var mongoDBShortId = ShortId();
+    var shortId = mongoDBShortId.encode(ObjectId());
+
+    return shortId.toUpperCase();
   },
 
   normalizeIds: (where) => {
