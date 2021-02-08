@@ -73,6 +73,14 @@ const utilities = {
       where['parent_id'] = utilities.makeObjectId(where['parent_id']);
     }
 
+    if (where['courier_id']) {
+      where['courier_id'] = utilities.makeObjectId(where['courier_id']);
+    }
+
+    if (where['pre_order_id']) {
+      where['pre_order_id'] = utilities.makeObjectId(where['pre_order_id']);
+    }
+
     if (where['_meta.user_id']) {
       where['_meta.user_id'] = utilities.makeObjectId(where['_meta.user_id']);
     }

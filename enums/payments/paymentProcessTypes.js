@@ -1,13 +1,10 @@
 const Enum = require('enum');
 
 module.exports = new Enum({
-  TekYon: {
+  Income: {
     Id: 1,
   },
-  GitGel: {
+  Expense: {
     Id: 2,
-  },
-  Coklu: {
-    Id: 3,
   },
 });

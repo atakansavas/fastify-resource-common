@@ -19,6 +19,7 @@ const PromotionTypes = require('./payments/promotionTypes');
 const PaymentTypes = require('./payments/paymentTypes');
 const PaymentStatues = require('./payments/paymentStatues');
 const BalanceProcessTypes = require('./payments/balanceProcessTypes');
+const PaymentProcessTypes = require('./payments/paymentProcessTypes');
 
 module.exports = {
   Groups,
@@ -38,4 +39,5 @@ module.exports = {
   PaymentTypes,
   PaymentStatues,
   BalanceProcessTypes,
+  PaymentProcessTypes,
 };
