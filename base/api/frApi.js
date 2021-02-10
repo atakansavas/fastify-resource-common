@@ -54,7 +54,7 @@ module.exports = class FrApi {
     readFormatters = [],
   } = {}) {
     const urls = this.generateUrls();
-    xr;
+
     const methodsList = this.settings.Methods;
     console.info(this.routePrefix + ' resource initialized on', methodsList);
 
