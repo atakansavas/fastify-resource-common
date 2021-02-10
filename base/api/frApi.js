@@ -10,19 +10,20 @@ module.exports = class FrApi {
     fastify,
     opts,
     routePrefix,
-    methods,
+    settings,
     tableName,
     service,
-    authMethod
+    authMethod,
+    keyProps
   ) {
     this.fastify = fastify;
     this.opts = opts;
     this.routePrefix = '' + routePrefix;
-    this.methods = methods;
+    this.settings = settings;
     this.tableName = tableName;
     this.service = service;
     this.authMethod = authMethod;
-    this.isUseMeService = false;
+    this.keyProps = keyProps;
   }
 
   generateUrls() {
@@ -54,7 +55,7 @@ module.exports = class FrApi {
   } = {}) {
     const urls = this.generateUrls();
 
-    const methodsList = this.methods.map((item) => item.Method);
+    const methodsList = this.settings.Methods.map((item) => item.Method);
     console.info(this.routePrefix + ' resource initialized on', methodsList);
 
     const GET = this.methods.find((item) => item.Method == 'GET');
@@ -63,10 +64,6 @@ module.exports = class FrApi {
     const DELETE = this.methods.find((item) => item.Method == 'DELETE');
     const QUERY = this.methods.find((item) => item.Method == 'QUERY');
     const PARTIAL = this.methods.find((item) => item.Method == 'PARTIAL');
-
-    if (PARTIAL) {
-      this.isUseMeService = true;
-    }
 
     if (QUERY) {
       this.fastify.post(
@@ -111,6 +108,7 @@ module.exports = class FrApi {
             sort: sort,
             tableName: this.tableName,
             user: user,
+            settings: this.settings.ServiceSettings,
             token: authHeader,
           });
 
@@ -170,27 +168,13 @@ module.exports = class FrApi {
             });
           }
 
-          let _where = {};
-          let select = {};
-          let limit = 50;
-          let page = 0;
-          let sort = { _id: 1 };
+          let where = request.body.where || {};
+          let select = request.body.select || {};
+          let limit = parseInt(request.body.limit) || 50;
+          let page = parseInt(request.body.page) || 0;
+          let sort = request.body.sort || { _id: 1 };
 
-          if (request.body) {
-            _where = request.body.where || {};
-            select = request.body.select || {};
-            limit = parseInt(request.body.limit) || 50;
-            page = parseInt(request.body.page) || 0;
-            sort = request.body.sort || { _id: 1 };
-          }
-
-          let where = {
-            ..._where,
-            status: true,
-            $or: [{ parent_id: user._id }, { user_id: user._id }],
-          };
-
-          let result = await this.service.filter({
+          let result = await this.service.partial({
             db: this.opts.db,
             where: where,
             select: select,
@@ -199,6 +183,7 @@ module.exports = class FrApi {
             sort: sort,
             tableName: this.tableName,
             user: user,
+            settings: this.settings.ServiceSettings,
             token: authHeader,
           });
 
@@ -291,7 +276,7 @@ module.exports = class FrApi {
             console.log(urls.create + ' METHOD INIT : ', request);
           }
           let authHeader = request.headers.authorization || null;
-          var user = await this.authMethod(
+          const user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -315,7 +300,7 @@ module.exports = class FrApi {
             afterCreate: afterCreate,
             tableName: this.tableName,
             user,
-            isUseMeService: this.isUseMeService,
+            settings: this.settings.ServiceSettings,
             token: authHeader,
           });
           const formattedDocument = await Utilities.runReadFormatter(
@@ -352,9 +337,8 @@ module.exports = class FrApi {
           if (process.env.KEEPLOGS == 1) {
             console.log(urls.update + ' METHOD INIT : ', request);
           }
-          let user = {};
           let authHeader = request.headers.authorization || null;
-          user = await this.authMethod(
+          const user = await this.authMethod(
             authHeader,
             this.opts.secret,
             this.opts.db
@@ -379,6 +363,7 @@ module.exports = class FrApi {
             beforeUpdate: beforeUpdate,
             afterUpdate: afterUpdate,
             tableName: this.tableName,
+            settings: this.settings.ServiceSettings,
             user: user,
             token: authHeader,
           });

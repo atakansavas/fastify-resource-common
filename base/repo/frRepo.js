@@ -1,34 +1,14 @@
 const utilities = require('../../helpers/utilities');
 const frError = require('../../error/frError');
 const ErrorCodes = require('../../error/errorCodes');
-const moment = require('moment');
 const { ObjectId } = require('mongodb');
 
 const FrRepo = {
   //* Creates given document
-  create: async (db, collection, document, userId) => {
-    const unix = moment().unix();
-
+  create: async (db, collection, document, user) => {
     if (!document._id) {
       document['_id'] = ObjectId();
     }
-
-    if (document.user_id) {
-      document['user_id'] = ObjectId(document.user_id);
-    }
-
-    if (document.parent_id) {
-      document['parent_id'] = ObjectId(document.parent_id);
-    }
-
-    const metaObject = {
-      created_at: unix,
-      created_at_string: moment.unix(unix).format(),
-      created_by: userId,
-      is_deleted: false,
-    };
-
-    document['_meta'] = metaObject;
 
     try {
       await db.collection(collection).insertOne(document);
@@ -43,17 +23,7 @@ const FrRepo = {
   },
 
   //* Updates given document
-  update: async (db, collection, document, userId) => {
-    const unix = moment().unix();
-
-    const metaObject = {
-      modified_at: unix,
-      modified_at_string: moment.unix(unix).format(),
-      modified_by: userId,
-    };
-
-    document['_meta'] = { ...document['_meta'], ...metaObject };
-
+  update: async (db, collection, document) => {
     const _where = { _id: document._id };
 
     let updateResult = await db.collection(collection).update(_where, document);
@@ -66,17 +36,6 @@ const FrRepo = {
 
   //* Deletes given document
   delete: async (db, collection, document, userId) => {
-    const unix = moment().unix();
-
-    const metaObject = {
-      is_deleted: true,
-      deleted_at: unix,
-      deleted_at_string: moment.unix(unix).format(),
-      deleted_by: userId,
-    };
-
-    document['_meta'] = { ...document['_meta'], ...metaObject };
-
     const _where = { _id: document._id };
 
     let updateResult = await db.collection(collection).update(_where, document);

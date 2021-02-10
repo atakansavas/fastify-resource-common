@@ -47,7 +47,7 @@ const utilities = {
     var mongoDBShortId = ShortId();
     var shortId = mongoDBShortId.encode(ObjectId());
 
-    return shortId.toUpperCase();
+    return shortId;
   },
 
   normalizeIds: (where) => {
@@ -78,12 +78,18 @@ const utilities = {
       where['user_id'] = utilities.makeObjectId(where['user_id']);
     }
 
-    if (where['parent_id']) {
+    if (where['user_parent_id']) {
       where['parent_id'] = utilities.makeObjectId(where['parent_id']);
     }
 
     if (where['courier_id']) {
       where['courier_id'] = utilities.makeObjectId(where['courier_id']);
+    }
+
+    if (where['courier_parent_id']) {
+      where['courier_parent_id'] = utilities.makeObjectId(
+        where['courier_parent_id']
+      );
     }
 
     if (where['pre_order_id']) {

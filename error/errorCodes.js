@@ -18,6 +18,7 @@ const errorCodes = {
   Unauthorized: 'errors.unauthorizedProcess',
   FrozenAccount: 'errors.frozenAccount',
   CreditAccount: 'errors.creditAccount',
+  ReadOnlyColumns: 'errors.readOnlyColumns',
 };
 
 module.exports = errorCodes;
