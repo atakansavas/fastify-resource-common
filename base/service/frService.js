@@ -74,7 +74,7 @@ const FrService = {
         token
       );
 
-      if (result.items > 0) {
+      if (result.items.length > 0) {
         throw new frError({
           message: 'Read only columns cant be duplicated.',
           code: ErrorCodes.ReadOnlyColumns,
