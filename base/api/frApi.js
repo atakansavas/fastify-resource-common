@@ -54,16 +54,16 @@ module.exports = class FrApi {
     readFormatters = [],
   } = {}) {
     const urls = this.generateUrls();
-
-    const methodsList = this.settings.Methods.map((item) => item.Method);
+    xr;
+    const methodsList = this.settings.Methods;
     console.info(this.routePrefix + ' resource initialized on', methodsList);
 
-    const GET = this.methods.find((item) => item.Method == 'GET');
-    const POST = this.methods.find((item) => item.Method == 'POST');
-    const PUT = this.methods.find((item) => item.Method == 'PUT');
-    const DELETE = this.methods.find((item) => item.Method == 'DELETE');
-    const QUERY = this.methods.find((item) => item.Method == 'QUERY');
-    const PARTIAL = this.methods.find((item) => item.Method == 'PARTIAL');
+    const GET = methodsList.find((item) => item.Method == 'GET');
+    const POST = methodsList.find((item) => item.Method == 'POST');
+    const PUT = methodsList.find((item) => item.Method == 'PUT');
+    const DELETE = methodsList.find((item) => item.Method == 'DELETE');
+    const QUERY = methodsList.find((item) => item.Method == 'QUERY');
+    const PARTIAL = methodsList.find((item) => item.Method == 'PARTIAL');
 
     if (QUERY) {
       this.fastify.post(
