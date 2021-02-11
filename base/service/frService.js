@@ -198,7 +198,10 @@ const FrService = {
       const bodyKeys = [...Object.keys(body), '_id', '_meta'];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
         const key = settings.ReadOnlyColumns[i];
-        if (bodyKeys.indexOf(key) > -1) {
+        if (
+          bodyKeys.indexOf(key) > -1 &&
+          resource[key] != updatedResource[key]
+        ) {
           throw new frError({
             message: 'Read only columns cant be updated.',
             code: ErrorCodes.ReadOnlyColumns,
