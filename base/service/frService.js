@@ -99,14 +99,22 @@ const FrService = {
 
     let resource = body;
 
-    if (!body.user_id && settings.IsUser) {
+    if (
+      !body.user_id &&
+      settings.IsUser &&
+      user.userType == Enums.UserTypes.User.value.Id
+    ) {
       resource.user_id = ObjectId(user._id.toString());
       if (!body.user_parent_id && !!user.parent.parentId) {
         resource.user_parent_id = ObjectId(user.parent.parentId.toString());
       }
     }
 
-    if (!body.courier_id && settings.IsCourier) {
+    if (
+      !body.courier_id &&
+      settings.IsCourier &&
+      user.userType == Enums.UserTypes.Courier.value.Id
+    ) {
       resource.courier_id = ObjectId(user._id.toString());
       if (!body.courier_parent_id && !!user.parent.parentId) {
         resource.courier_parent_id = ObjectId(user.parent.parentId.toString());
