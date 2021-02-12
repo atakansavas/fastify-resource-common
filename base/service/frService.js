@@ -290,7 +290,7 @@ const FrService = {
       deleted_at: unix,
       deleted_at_string: moment.unix(unix).format(),
       deleted_by: user.name + ' ' + user.lastName,
-      deleted_by_id: userId,
+      deleted_by_id: user._id,
     };
 
     resource['_meta'] = { ...resource['_meta'], ...metaObject };

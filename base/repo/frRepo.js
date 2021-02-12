@@ -35,7 +35,7 @@ const FrRepo = {
   },
 
   //* Deletes given document
-  delete: async (db, collection, document, userId) => {
+  delete: async (db, collection, document) => {
     const _where = { _id: document._id };
 
     let updateResult = await db.collection(collection).update(_where, document);
