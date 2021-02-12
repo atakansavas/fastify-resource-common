@@ -15,7 +15,7 @@ module.exports = new Enum({
   },
   ZonePrices: {
     Id: 4,
-    Title: 'Bölge Ayarları',
+    Title: 'Bölge Fiyatlari',
   },
   DistancePrices: {
     Id: 5,
@@ -24,5 +24,9 @@ module.exports = new Enum({
   SidePrices: {
     Id: 6,
     Title: 'Yaka Fiyatları',
+  },
+  ZoneDurations: {
+    Id: 6,
+    Title: 'Bolge Sureleri',
   },
 });
