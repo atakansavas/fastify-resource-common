@@ -321,8 +321,14 @@ const FrService = {
   } = {}) => {
     let _where = {
       ...where,
-      status: true,
     };
+
+    if (settings.SkipStatus) {
+      _where = {
+        ...where,
+        status: true,
+      };
+    }
 
     let result = await FrRepo.query(
       _where,
