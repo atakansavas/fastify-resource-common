@@ -21,6 +21,7 @@ const PaymentTypes = require('./payments/paymentTypes');
 const PaymentStatues = require('./payments/paymentStatues');
 const BalanceProcessTypes = require('./payments/balanceProcessTypes');
 const PaymentProcessTypes = require('./payments/paymentProcessTypes');
+const PaymentForTypes = require('./payments/paymentForTypes');
 
 module.exports = {
   Groups,
@@ -33,6 +34,7 @@ module.exports = {
   Zones,
   ZoneDurations,
   DurationPrices,
+  PaymentForTypes,
   DistancePrices,
   SidePrices,
   UserTypes,

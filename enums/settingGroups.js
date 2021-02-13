@@ -26,7 +26,7 @@ module.exports = new Enum({
     Title: 'Yaka Fiyatları',
   },
   ZoneDurations: {
-    Id: 6,
+    Id: 7,
     Title: 'Bolge Sureleri',
   },
 });
