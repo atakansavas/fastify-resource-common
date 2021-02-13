@@ -110,7 +110,7 @@ const FrService = {
       }
     } else {
       resource.user_id = ObjectId(body.user_id.toString());
-      if (!body.user_parent_id) {
+      if (body.user_parent_id) {
         resource.user_parent_id = ObjectId(body.user_parent_id.toString());
       }
     }
@@ -126,7 +126,7 @@ const FrService = {
       }
     } else {
       resource.courier_id = ObjectId(body.courier_id.toString());
-      if (!body.courier_parent_id) {
+      if (body.courier_parent_id) {
         resource.courier_parent_id = ObjectId(
           body.courier_parent_id.toString()
         );
