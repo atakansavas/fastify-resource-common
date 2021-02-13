@@ -98,38 +98,52 @@ const FrService = {
     };
 
     let resource = body;
+    const useOwner = settings.UseOwner;
 
-    if (
-      !body.user_id &&
-      settings.IsUser &&
-      user.userType == Enums.UserTypes.User.value.Id
-    ) {
-      resource.user_id = ObjectId(user._id.toString());
-      if (!body.user_parent_id && !!user.parent.parentId) {
-        resource.user_parent_id = ObjectId(user.parent.parentId.toString());
+    if (settings.IsUser && user.userType == Enums.UserTypes.User.value.Id) {
+      if (!body.user_id) {
+        resource.user_id = ObjectId(user._id.toString());
+        if (!body.user_parent_id && !!user.parent.parentId) {
+          resource.user_parent_id = ObjectId(user.parent.parentId.toString());
+        }
+      } else if (body.user_id) {
+        resource.user_id = ObjectId(body.user_id.toString());
+        if (body.user_parent_id) {
+          resource.user_parent_id = ObjectId(body.user_parent_id.toString());
+        }
       }
-    } else if (body.user_id) {
-      resource.user_id = ObjectId(body.user_id.toString());
-      if (body.user_parent_id) {
-        resource.user_parent_id = ObjectId(body.user_parent_id.toString());
+
+      if (useOwner) {
+        resource.user_owner_id = resource.user_parent_id
+          ? resource.user_parent_id
+          : resource.user_id;
       }
     }
 
     if (
-      !body.courier_id &&
       settings.IsCourier &&
       user.userType == Enums.UserTypes.Courier.value.Id
     ) {
-      resource.courier_id = ObjectId(user._id.toString());
-      if (!body.courier_parent_id && !!user.parent.parentId) {
-        resource.courier_parent_id = ObjectId(user.parent.parentId.toString());
+      if (!body.courier_id) {
+        resource.courier_id = ObjectId(user._id.toString());
+        if (!body.courier_parent_id && !!user.parent.parentId) {
+          resource.courier_parent_id = ObjectId(
+            user.parent.parentId.toString()
+          );
+        }
+      } else if (body.courier_id) {
+        resource.courier_id = ObjectId(body.courier_id.toString());
+        if (body.courier_parent_id) {
+          resource.courier_parent_id = ObjectId(
+            body.courier_parent_id.toString()
+          );
+        }
       }
-    } else if (body.courier_id) {
-      resource.courier_id = ObjectId(body.courier_id.toString());
-      if (body.courier_parent_id) {
-        resource.courier_parent_id = ObjectId(
-          body.courier_parent_id.toString()
-        );
+
+      if (useOwner) {
+        resource.courier_owner_id = resource.courier_parent_id
+          ? resource.courier_parent_id
+          : resource.courier_id;
       }
     }
 
@@ -138,7 +152,7 @@ const FrService = {
       created_at: unix,
       created_at_string: moment.unix(unix).format(),
       created_by_id: user._id,
-      created_by: user.name + ' ' + user.lastName,
+      created_by: !!user.name ? user.name + ' ' + user.lastName : 'ApiAdmin',
       is_deleted: false,
     };
 
@@ -239,7 +253,7 @@ const FrService = {
       modified_at: unix,
       modified_at_string: moment.unix(unix).format(),
       modified_by_id: user._id,
-      modified_by: user.name + ' ' + user.lastName,
+      modified_by: !!user.name ? user.name + ' ' + user.lastName : 'ApiAdmin',
     };
 
     resource['_meta'] = { ...resource['_meta'], ...metaObject };
@@ -301,7 +315,7 @@ const FrService = {
       is_deleted: true,
       deleted_at: unix,
       deleted_at_string: moment.unix(unix).format(),
-      deleted_by: user.name + ' ' + user.lastName,
+      deleted_by: !!user.name ? user.name + ' ' + user.lastName : 'ApiAdmin',
       deleted_by_id: user._id,
     };
 
@@ -372,13 +386,21 @@ const FrService = {
       status: true,
     };
 
-    if (user.userType == Enums.UserTypes.User.value.Id) {
-      _where['$or'] = [{ user_parent_id: user._id }, { user_id: user._id }];
-    } else if (user.userType == Enums.UserTypes.Courier.value.Id) {
-      _where['$or'] = [
-        { courier_parent_id: user._id },
-        { courier_id: user._id },
-      ];
+    if (settings.UseOwner) {
+      if (user.userType == Enums.UserTypes.User.value.Id) {
+        _where['user_owner_id'] = user._id;
+      } else if (user.userType == Enums.UserTypes.Courier.value.Id) {
+        _where['courier_owner_id'] = user._id;
+      }
+    } else {
+      if (user.userType == Enums.UserTypes.User.value.Id) {
+        _where['$or'] = [{ user_parent_id: user._id }, { user_id: user._id }];
+      } else if (user.userType == Enums.UserTypes.Courier.value.Id) {
+        _where['$or'] = [
+          { courier_parent_id: user._id },
+          { courier_id: user._id },
+        ];
+      }
     }
 
     let result = await FrRepo.query(

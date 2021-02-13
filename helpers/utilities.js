@@ -82,6 +82,10 @@ const utilities = {
       where['parent_id'] = utilities.makeObjectId(where['parent_id']);
     }
 
+    if (where['user_owner_id']) {
+      where['user_owner_id'] = utilities.makeObjectId(where['user_owner_id']);
+    }
+
     if (where['courier_id']) {
       where['courier_id'] = utilities.makeObjectId(where['courier_id']);
     }
@@ -89,6 +93,12 @@ const utilities = {
     if (where['courier_parent_id']) {
       where['courier_parent_id'] = utilities.makeObjectId(
         where['courier_parent_id']
+      );
+    }
+
+    if (where['courier_owner_id']) {
+      where['courier_owner_id'] = utilities.makeObjectId(
+        where['courier_owner_id']
       );
     }
 
