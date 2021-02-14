@@ -19,6 +19,7 @@ const errorCodes = {
   FrozenAccount: 'errors.frozenAccount',
   CreditAccount: 'errors.creditAccount',
   ReadOnlyColumns: 'errors.readOnlyColumns',
+  BalanceIsNotEnough: 'errors.balanceIsNotEnough',
 };
 
 module.exports = errorCodes;

@@ -36,6 +36,24 @@ module.exports = class RequestHelper {
     });
   };
 
+  delete(path) {
+    if (process.env.KEEPLOGS == 1) {
+      console.info('REQUEST => DELETE', this.baseUrl + path);
+    }
+    return new Promise((resolve, reject) => {
+      this.service
+        .delete(this.baseUrl + path)
+        .then((resp) => {
+          console.log(resp.data);
+          resolve(resp.data);
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
+    });
+  }
+
   get(path) {
     if (process.env.KEEPLOGS == 1) {
       console.info('REQUEST => GET', this.baseUrl + path);
