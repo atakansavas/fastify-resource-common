@@ -54,10 +54,10 @@ const FrService = {
     if (settings.ReadOnlyColumns) {
       let whereClause = [];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
-        const key = settings.ReadOnlyColumns[i];
-        if (body[key]) {
+        let columnKey = settings.ReadOnlyColumns[i];
+        if (body[columnKey]) {
           let keyObject = {};
-          keyObject[key] = body[key];
+          keyObject[columnKey] = body[columnKey];
           whereClause.push(keyObject);
         }
       }
