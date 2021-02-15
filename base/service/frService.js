@@ -54,10 +54,12 @@ const FrService = {
     if (settings.ReadOnlyColumns) {
       let whereClause = [];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
-        const key = settings.ReadOnlyColumns[i];
-        let keyObject = {};
-        keyObject[key] = body[key];
-        whereClause.push(keyObject);
+        if (body[key]) {
+          const key = settings.ReadOnlyColumns[i];
+          let keyObject = {};
+          keyObject[key] = body[key];
+          whereClause.push(keyObject);
+        }
       }
       const where = {
         $or: [...whereClause],
