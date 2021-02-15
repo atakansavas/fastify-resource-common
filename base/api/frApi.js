@@ -95,7 +95,7 @@ module.exports = class FrApi {
 
           let where = request.body.where || {};
           let select = request.body.select || {};
-          let limit = parseInt(request.body.limit) || 50;
+          let limit = parseInt(request.body.limit) || 30;
           let page = parseInt(request.body.page) || 0;
           let sort = request.body.sort || { _id: 1 };
 
@@ -177,7 +177,7 @@ module.exports = class FrApi {
           if (request.body) {
             where = request.body.where || {};
             select = request.body.select || {};
-            limit = parseInt(request.body.limit) || 50;
+            limit = parseInt(request.body.limit) || 30;
             page = parseInt(request.body.page) || 0;
             sort = request.body.sort || { _id: 1 };
           }

@@ -61,30 +61,33 @@ const FrService = {
           whereClause.push(keyObject);
         }
       }
-      const where = {
-        $or: [...whereClause],
-      };
 
-      let result = await FrRepo.query(
-        where,
-        {},
-        null,
-        null,
-        null,
-        db,
-        tableName,
-        token
-      );
+      if (whereClause.length > 0) {
+        const where = {
+          $or: [...whereClause],
+        };
 
-      if (result.items.length > 0) {
-        throw new frError({
-          message: 'Read only columns cant be duplicated.',
-          code: ErrorCodes.ReadOnlyColumns,
-          status: 409,
-          context: {
-            provided: settings.ReadOnlyColumns,
-          },
-        });
+        let result = await FrRepo.query(
+          where,
+          {},
+          null,
+          null,
+          null,
+          db,
+          tableName,
+          token
+        );
+
+        if (result.items.length > 0) {
+          throw new frError({
+            message: 'Read only columns cant be duplicated.',
+            code: ErrorCodes.ReadOnlyColumns,
+            status: 409,
+            context: {
+              provided: settings.ReadOnlyColumns,
+            },
+          });
+        }
       }
     }
 
@@ -352,6 +355,11 @@ const FrService = {
       status: true,
     };
 
+    const _select = {
+      _meta: -1,
+      ...select,
+    };
+
     if (settings.SkipStatus) {
       _where = {
         ...where,
@@ -360,7 +368,7 @@ const FrService = {
 
     let result = await FrRepo.query(
       _where,
-      select,
+      _select,
       limit,
       page,
       sort,
@@ -388,6 +396,11 @@ const FrService = {
       status: true,
     };
 
+    const _select = {
+      _meta: -1,
+      ...select,
+    };
+
     if (settings.UseOwner) {
       if (user.userType == Enums.UserTypes.User.value.Id) {
         _where['user_owner_id'] = user._id;
@@ -407,7 +420,7 @@ const FrService = {
 
     let result = await FrRepo.query(
       _where,
-      select,
+      _select,
       limit,
       page,
       sort,
