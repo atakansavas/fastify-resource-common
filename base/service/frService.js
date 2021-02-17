@@ -355,10 +355,14 @@ const FrService = {
       status: true,
     };
 
-    const _select = {
-      _meta: -1,
-      ...select,
-    };
+    let _select = {};
+
+    if (!!select) {
+      _select = {
+        _meta: -1,
+        ...select,
+      };
+    }
 
     if (settings.SkipStatus) {
       _where = {
