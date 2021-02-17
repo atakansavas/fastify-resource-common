@@ -357,7 +357,7 @@ const FrService = {
 
     let _select = {};
 
-    if (!!select) {
+    if (!Validator.valideEmptyObject(select)) {
       _select = {
         _meta: -1,
         ...select,
