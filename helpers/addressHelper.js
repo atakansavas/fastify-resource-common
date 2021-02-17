@@ -36,12 +36,6 @@ const addressHelper = {
 
     return response;
   },
-
-  getLoginQuery: (params) => {
-    return {
-      phoneNumber: params.phoneNumber,
-    };
-  },
 };
 
 module.exports = addressHelper;
