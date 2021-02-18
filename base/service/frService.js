@@ -234,6 +234,7 @@ const FrService = {
     }
 
     if (settings.ReadOnlyColumns) {
+      const bodyKeys = [...Object.keys(body), '_id', '_meta'];
       let whereClause = [];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
         let columnKey = settings.ReadOnlyColumns[i];
