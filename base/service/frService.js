@@ -237,7 +237,10 @@ const FrService = {
       let whereClause = [];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
         let columnKey = settings.ReadOnlyColumns[i];
-        if (body[columnKey]) {
+        if (
+          bodyKeys.indexOf(key) > -1 &&
+          resource[key] != updatedResource[key]
+        ) {
           let keyObject = {};
           keyObject[columnKey] = body[columnKey];
           whereClause.push(keyObject);
