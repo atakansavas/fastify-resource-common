@@ -234,15 +234,35 @@ const FrService = {
     }
 
     if (settings.ReadOnlyColumns) {
-      const bodyKeys = [...Object.keys(body), '_id', '_meta'];
+      let whereClause = [];
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
-        const key = settings.ReadOnlyColumns[i];
-        if (
-          bodyKeys.indexOf(key) > -1 &&
-          resource[key] != updatedResource[key]
-        ) {
+        let columnKey = settings.ReadOnlyColumns[i];
+        if (body[columnKey]) {
+          let keyObject = {};
+          keyObject[columnKey] = body[columnKey];
+          whereClause.push(keyObject);
+        }
+      }
+
+      if (whereClause.length > 0) {
+        const where = {
+          $or: [...whereClause],
+        };
+
+        let result = await FrRepo.query(
+          where,
+          {},
+          null,
+          null,
+          null,
+          db,
+          tableName,
+          token
+        );
+
+        if (result.items.length > 0) {
           throw new frError({
-            message: 'Read only columns cant be updated.',
+            message: 'Read only columns cant be duplicated.',
             code: ErrorCodes.ReadOnlyColumns,
             status: 409,
             context: {
@@ -252,6 +272,26 @@ const FrService = {
         }
       }
     }
+
+    // if (settings.ReadOnlyColumns) {
+    //   const bodyKeys = [...Object.keys(body), '_id', '_meta'];
+    //   for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
+    //     const key = settings.ReadOnlyColumns[i];
+    //     if (
+    //       bodyKeys.indexOf(key) > -1 &&
+    //       resource[key] != updatedResource[key]
+    //     ) {
+    //       throw new frError({
+    //         message: 'Read only columns cant be updated.',
+    //         code: ErrorCodes.ReadOnlyColumns,
+    //         status: 409,
+    //         context: {
+    //           provided: settings.ReadOnlyColumns,
+    //         },
+    //       });
+    //     }
+    //   }
+    // }
 
     const unix = moment().unix();
     const metaObject = {
