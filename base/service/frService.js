@@ -239,8 +239,8 @@ const FrService = {
       for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
         let columnKey = settings.ReadOnlyColumns[i];
         if (
-          bodyKeys.indexOf(key) > -1 &&
-          resource[key] != updatedResource[key]
+          bodyKeys.indexOf(columnKey) > -1 &&
+          resource[columnKey] != updatedResource[columnKey]
         ) {
           let keyObject = {};
           keyObject[columnKey] = body[columnKey];
