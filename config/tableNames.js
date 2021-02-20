@@ -9,6 +9,7 @@ const tableNames = {
   SettingsDb: 'settings_db',
   SettingsHistoryDb: 'settings_history_db',
   CitiesDb: 'cities_db',
+  CardsDb: 'cards_db',
   CountiesDb: 'counties_db',
   DistrictsDb: 'districts_db',
   OrdersDb: 'orders_db',
