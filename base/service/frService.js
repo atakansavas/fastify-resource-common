@@ -403,7 +403,7 @@ const FrService = {
 
     if (!Validator.valideEmptyObject(select)) {
       _select = {
-        _meta: -1,
+        _meta: 0,
         ...select,
       };
     }
