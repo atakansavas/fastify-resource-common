@@ -401,12 +401,12 @@ const FrService = {
 
     let _select = {};
 
-    if (!Validator.valideEmptyObject(select)) {
-      _select = {
-        _meta: 0,
-        ...select,
-      };
-    }
+    // if (!Validator.valideEmptyObject(select)) {
+    //   _select = {
+    //     _meta: 0,
+    //     ...select,
+    //   };
+    // }
 
     if (settings.SkipStatus) {
       _where = {
@@ -416,7 +416,7 @@ const FrService = {
 
     let result = await FrRepo.query(
       _where,
-      _select,
+      select,
       limit,
       page,
       sort,
