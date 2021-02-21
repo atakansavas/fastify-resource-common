@@ -444,10 +444,10 @@ const FrService = {
       status: true,
     };
 
-    const _select = {
-      _meta: 0,
-      ...select,
-    };
+    // const _select = {
+    //   _meta: 0,
+    //   ...select,
+    // };
 
     if (settings.UseOwner) {
       if (user.userType == Enums.UserTypes.User.value.Id) {
@@ -468,7 +468,7 @@ const FrService = {
 
     let result = await FrRepo.query(
       _where,
-      _select,
+      select,
       limit,
       page,
       sort,
