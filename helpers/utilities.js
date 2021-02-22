@@ -79,7 +79,7 @@ const utilities = {
     }
 
     if (where['user_parent_id']) {
-      where['parent_id'] = utilities.makeObjectId(where['parent_id']);
+      where['user_parent_id'] = utilities.makeObjectId(where['user_parent_id']);
     }
 
     if (where['user_owner_id']) {
