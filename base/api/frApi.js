@@ -90,6 +90,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
@@ -165,6 +169,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
@@ -245,6 +253,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
@@ -295,6 +307,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
@@ -357,6 +373,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
@@ -411,6 +431,10 @@ module.exports = class FrApi {
               message: 'Unauthorized process.',
               code: ErrorCodes.Unauthorized,
               status: 403,
+              context: {
+                activeType: user.userType,
+                validTypes: PARTIAL.UserTypes,
+              },
             });
           }
 
