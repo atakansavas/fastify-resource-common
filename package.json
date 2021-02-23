@@ -1,6 +1,6 @@
 {
   "name": "@atakansavas/fastify-resource-common",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "nodejs fastify api resource api common",
   "main": "index.js",
   "publishConfig": {

@@ -9,26 +9,25 @@ module.exports = new Enum({
   Picked: {
     Id: 2,
     Desc: 'Teslim alindi.',
-    OrderStatusId: 1,
+    OrderStatusId: 2,
   },
   Departed: {
     Id: 3,
     Desc: 'Kurye dağıtıma çıktı.',
-    OrderStatusId: 1,
+    OrderStatusId: 2,
   },
   Transfered: {
     Id: 4,
     Desc: 'Paket transfer edildi.',
-    OrderStatusId: 1,
   },
   Succeed: {
     Id: 5,
     Desc: 'Gönderim tamamlandı.',
-    OrderStatusId: 1,
+    OrderStatusId: 4,
   },
   Fail: {
     Id: 6,
     Desc: 'Gönderim tamamlanamadı.',
-    OrderStatusId: 1,
+    OrderStatusId: 5,
   },
 });
