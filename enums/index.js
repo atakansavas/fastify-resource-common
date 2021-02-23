@@ -15,6 +15,8 @@ const ZoneDurations = require('./settings/zoneDurations');
 
 const OrderTypes = require('./order/orderTypes');
 const OrderInputTypes = require('./order/orderInputTypes');
+const OrderStatusTypes = require('./order/orderStatusTypes');
+const LogStatusTypes = require('./order/logStatusTypes');
 
 const PromotionTypes = require('./payments/promotionTypes');
 const PaymentTypes = require('./payments/paymentTypes');
@@ -29,6 +31,8 @@ module.exports = {
   PackageTypes,
   VehicleTypes,
   PricingTypes,
+  LogStatusTypes,
+  OrderStatusTypes,
   OrderTypes,
   AddressTypes,
   Zones,

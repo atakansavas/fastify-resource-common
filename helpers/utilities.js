@@ -106,6 +106,10 @@ const utilities = {
       where['pre_order_id'] = utilities.makeObjectId(where['pre_order_id']);
     }
 
+    if (where['order_id']) {
+      where['order_id'] = utilities.makeObjectId(where['order_id']);
+    }
+
     if (where['_meta.user_id']) {
       where['_meta.user_id'] = utilities.makeObjectId(where['_meta.user_id']);
     }
