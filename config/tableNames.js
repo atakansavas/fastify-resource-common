@@ -18,6 +18,7 @@ const tableNames = {
   PreOrder: 'preorder_db',
   Promotions: 'promotions_db',
   BalanceDb: 'balance_db',
+  OrderLogsDb: 'orderlogs_db',
 };
 
 module.exports = tableNames;
