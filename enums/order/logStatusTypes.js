@@ -1,33 +1,43 @@
 const Enum = require('enum');
 
 module.exports = new Enum({
-  Assigned: {
+  Open: {
     Id: 1,
+    Desc: 'Sipariş beklemede.',
+    OrderStatusId: 1,
+  },
+  Assigned: {
+    Id: 2,
     Desc: 'Kuryeye atandı.',
     OrderStatusId: 1,
   },
   Picked: {
-    Id: 2,
+    Id: 3,
     Desc: 'Teslim alindi.',
     OrderStatusId: 2,
   },
   Departed: {
-    Id: 3,
+    Id: 4,
     Desc: 'Kurye dağıtıma çıktı.',
-    OrderStatusId: 2,
+    OrderStatusId: 3,
   },
   Transfered: {
-    Id: 4,
+    Id: 5,
     Desc: 'Paket transfer edildi.',
   },
   Succeed: {
-    Id: 5,
+    Id: 6,
     Desc: 'Gönderim tamamlandı.',
     OrderStatusId: 4,
   },
   Fail: {
-    Id: 6,
+    Id: 7,
     Desc: 'Gönderim tamamlanamadı.',
-    OrderStatusId: 5,
+    // OrderStatusId: 5,
+  },
+  Canceled: {
+    Id: 8,
+    Desc: 'Kurye almaktan vazgeçti.',
+    // OrderStatusId: 1,
   },
 });
