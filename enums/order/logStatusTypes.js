@@ -33,11 +33,11 @@ module.exports = new Enum({
   Fail: {
     Id: 7,
     Desc: 'Gönderim tamamlanamadı.',
-    // OrderStatusId: 5,
+    OrderStatusId: 5,
   },
   Canceled: {
     Id: 8,
     Desc: 'Kurye almaktan vazgeçti.',
-    // OrderStatusId: 1,
+    OrderStatusId: 5,
   },
 });
