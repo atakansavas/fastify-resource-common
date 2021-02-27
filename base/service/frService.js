@@ -282,23 +282,23 @@ const FrService = {
       user.userType == Enums.UserTypes.Courier.value.Id
     ) {
       if (!body.courier_id) {
-        resource.courier_id = ObjectId(user._id.toString());
+        updatedResource.courier_id = ObjectId(user._id.toString());
         if (!body.courier_parent_id && !!user.parent.parentId) {
-          resource.courier_parent_id = ObjectId(
+          updatedResource.courier_parent_id = ObjectId(
             user.parent.parentId.toString()
           );
         }
       } else if (body.courier_id) {
-        resource.courier_id = ObjectId(body.courier_id.toString());
+        updatedResource.courier_id = ObjectId(body.courier_id.toString());
         if (body.courier_parent_id) {
-          resource.courier_parent_id = ObjectId(
+          updatedResource.courier_parent_id = ObjectId(
             body.courier_parent_id.toString()
           );
         }
       }
 
       if (settings.UseOwner) {
-        resource.courier_owner_id = resource.courier_parent_id
+        updatedResource.courier_owner_id = resource.courier_parent_id
           ? resource.courier_parent_id
           : resource.courier_id;
       }
