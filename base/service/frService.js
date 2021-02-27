@@ -277,25 +277,32 @@ const FrService = {
       }
     }
 
-    // if (settings.ReadOnlyColumns) {
-    //   const bodyKeys = [...Object.keys(body), '_id', '_meta'];
-    //   for (let i = 0; i < settings.ReadOnlyColumns.length; i++) {
-    //     const key = settings.ReadOnlyColumns[i];
-    //     if (
-    //       bodyKeys.indexOf(key) > -1 &&
-    //       resource[key] != updatedResource[key]
-    //     ) {
-    //       throw new frError({
-    //         message: 'Read only columns cant be updated.',
-    //         code: ErrorCodes.ReadOnlyColumns,
-    //         status: 409,
-    //         context: {
-    //           provided: settings.ReadOnlyColumns,
-    //         },
-    //       });
-    //     }
-    //   }
-    // }
+    if (
+      settings.IsCourier &&
+      user.userType == Enums.UserTypes.Courier.value.Id
+    ) {
+      if (!body.courier_id) {
+        resource.courier_id = ObjectId(user._id.toString());
+        if (!body.courier_parent_id && !!user.parent.parentId) {
+          resource.courier_parent_id = ObjectId(
+            user.parent.parentId.toString()
+          );
+        }
+      } else if (body.courier_id) {
+        resource.courier_id = ObjectId(body.courier_id.toString());
+        if (body.courier_parent_id) {
+          resource.courier_parent_id = ObjectId(
+            body.courier_parent_id.toString()
+          );
+        }
+      }
+
+      if (useOwner) {
+        resource.courier_owner_id = resource.courier_parent_id
+          ? resource.courier_parent_id
+          : resource.courier_id;
+      }
+    }
 
     const unix = moment().unix();
     const metaObject = {
