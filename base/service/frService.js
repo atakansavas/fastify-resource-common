@@ -297,7 +297,7 @@ const FrService = {
         }
       }
 
-      if (useOwner) {
+      if (settings.UseOwner) {
         resource.courier_owner_id = resource.courier_parent_id
           ? resource.courier_parent_id
           : resource.courier_id;
