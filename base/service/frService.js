@@ -32,6 +32,7 @@ const FrService = {
     user = null,
     settings = {},
     token = '',
+    _agent = '',
   } = {}) => {
     if (schema !== {}) {
       let { valid, ajv } = Validator.validateBodyBySchema(body, schema);
@@ -90,17 +91,6 @@ const FrService = {
         }
       }
     }
-
-    const pipelineParams = {
-      db: db,
-      Repo: FrRepo,
-      resource: body,
-      user: user,
-      tableName: tableName,
-      body: body,
-      _resource: body,
-      token: token,
-    };
 
     let resource = body;
     const useOwner = settings.UseOwner;
@@ -162,6 +152,22 @@ const FrService = {
     };
 
     resource['_meta'] = metaObject;
+
+    if (_agent) {
+      //* Agent geliyor ise semaya ekle.
+      resource['_agent'] = JSON.parse(_agent);
+    }
+
+    const pipelineParams = {
+      db: db,
+      Repo: FrRepo,
+      resource: body,
+      user: user,
+      tableName: tableName,
+      body: body,
+      _resource: body,
+      token: token,
+    };
 
     if (beforeCreate !== []) {
       resource = await Utilities.runFunctionPool(beforeCreate, pipelineParams);

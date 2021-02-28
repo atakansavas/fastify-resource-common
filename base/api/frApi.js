@@ -315,10 +315,6 @@ module.exports = class FrApi {
           }
 
           let providedBody = request.body;
-          if (request.headers['_agent']) {
-            //* Agent geliyor ise semaya ekle.
-            providedBody['_agent'] = JSON.parse(request.headers['_agent']);
-          }
 
           let document = await this.service.create({
             db: this.opts.db,
@@ -330,6 +326,7 @@ module.exports = class FrApi {
             user,
             settings: this.settings.ServiceSettings,
             token: authHeader,
+            _agent: request.headers['_agent'],
           });
           const formattedDocument = await Utilities.runReadFormatter(
             readFormatters,
