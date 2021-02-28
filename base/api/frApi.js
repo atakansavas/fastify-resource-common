@@ -315,6 +315,10 @@ module.exports = class FrApi {
           }
 
           let providedBody = request.body;
+          if (request.headers['_agent']) {
+            //* Agent geliyor ise semaya ekle.
+            providedBody['_agent'] = JSON.parse(request.headers['_agent']);
+          }
 
           let document = await this.service.create({
             db: this.opts.db,
