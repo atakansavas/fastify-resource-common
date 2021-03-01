@@ -118,10 +118,12 @@ module.exports = class FrApi {
 
           let _response = [];
           for (let document of result.items) {
-            let _document = Utilities.runReadFormatter(
-              readFormatters,
-              document
-            );
+            let _document = await Utilities.runReadFormatter({
+              functions: readFormatters,
+              resource: document,
+              user: user,
+              token: authHeader,
+            });
             _response.push(_document);
           }
 
@@ -205,10 +207,12 @@ module.exports = class FrApi {
 
           let _response = [];
           for (let document of result.items) {
-            let _document = Utilities.runReadFormatter(
-              readFormatters,
-              document
-            );
+            let _document = await Utilities.runReadFormatter({
+              functions: readFormatters,
+              resource: document,
+              user: user,
+              token: authHeader,
+            });
             _response.push(_document);
           }
 
@@ -269,7 +273,12 @@ module.exports = class FrApi {
             user: user,
           });
 
-          document = await Utilities.runReadFormatter(readFormatters, document);
+          document = await Utilities.runReadFormatter({
+            functions: readFormatters,
+            resource: document,
+            user: user,
+            token: authHeader,
+          });
 
           // document = Utilities.hideSystemProps(document);
 
@@ -328,10 +337,12 @@ module.exports = class FrApi {
             token: authHeader,
             _agent: request.headers['_agent'],
           });
-          const formattedDocument = await Utilities.runReadFormatter(
-            readFormatters,
-            document
-          );
+          const formattedDocument = await Utilities.runReadFormatter({
+            functions: readFormatters,
+            resource: document,
+            user: user,
+            token: authHeader,
+          });
 
           if (process.env.KEEPLOGS == 1) {
             console.log(urls.create + ' METHOD RESPONSE : ', formattedDocument);
@@ -397,7 +408,12 @@ module.exports = class FrApi {
             token: authHeader,
           });
 
-          document = await Utilities.runReadFormatter(readFormatters, document);
+          document = await Utilities.runReadFormatter({
+            functions: readFormatters,
+            resource: document,
+            user: user,
+            token: authHeader,
+          });
 
           if (process.env.KEEPLOGS == 1) {
             console.log(urls.update + ' METHOD RESPONSE : ', document);

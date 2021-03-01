@@ -177,9 +177,9 @@ const utilities = {
 
     return params.resource;
   },
-  runReadFormatter: (functions, resource) => {
+  runReadFormatter: async ({ functions, resource, user, token }) => {
     for (let func of functions) {
-      resource = func(resource);
+      resource = func({ functions, resource, user, token });
     }
     return resource;
   },
