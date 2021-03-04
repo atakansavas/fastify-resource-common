@@ -92,7 +92,7 @@ module.exports = class FrApi {
               status: 403,
               context: {
                 activeType: user.userType,
-                validTypes: PARTIAL.UserTypes,
+                validTypes: QUERY.UserTypes,
               },
             });
           }
@@ -259,7 +259,7 @@ module.exports = class FrApi {
               status: 403,
               context: {
                 activeType: user.userType,
-                validTypes: PARTIAL.UserTypes,
+                validTypes: GET.UserTypes,
               },
             });
           }
@@ -318,7 +318,7 @@ module.exports = class FrApi {
               status: 403,
               context: {
                 activeType: user.userType,
-                validTypes: PARTIAL.UserTypes,
+                validTypes: POST.UserTypes,
               },
             });
           }
@@ -387,7 +387,7 @@ module.exports = class FrApi {
               status: 403,
               context: {
                 activeType: user.userType,
-                validTypes: PARTIAL.UserTypes,
+                validTypes: PUT.UserTypes,
               },
             });
           }
@@ -450,7 +450,7 @@ module.exports = class FrApi {
               status: 403,
               context: {
                 activeType: user.userType,
-                validTypes: PARTIAL.UserTypes,
+                validTypes: DELETE.UserTypes,
               },
             });
           }
