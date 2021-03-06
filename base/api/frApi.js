@@ -353,6 +353,10 @@ module.exports = class FrApi {
       );
     }
 
+    const updateSchema = updateValidationSchema
+      ? updateValidationSchema
+      : createValidationSchema;
+
     if (PUT) {
       this.fastify.put(
         urls.update,
@@ -361,7 +365,7 @@ module.exports = class FrApi {
             tags: [this.tableName],
             summary: PUT.Description,
             body: {
-              ...this.clearSchemas(createValidationSchema),
+              ...this.clearSchemas(updateSchema),
               agent: agentSchema,
             },
             response: {
