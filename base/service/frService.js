@@ -68,16 +68,14 @@ const FrService = {
           $or: [...whereClause],
         };
 
-        let result = await FrRepo.query(
-          where,
-          {},
-          null,
-          null,
-          null,
-          db,
-          tableName,
-          token
-        );
+        let result = await FrService.filter({
+          db: db,
+          where: where,
+          tableName: tableName,
+          user: user,
+          token: token,
+          settings: settings,
+        });
 
         if (result.items.length > 0) {
           throw new frError({
