@@ -3,7 +3,8 @@ const Groups = require('./settingGroups');
 const PricingTypes = require('./pricingTypes');
 const AddressTypes = require('./addressTypes');
 const UserTypes = require('./userTypes');
-const NotificationTypes = require('./notificationTypes');
+const NotificationTypes = require('./notifications/notificationTypes');
+const NotificationForTypes = require('./notifications/notificationForTypes');
 
 const System = require('./settings/systemSettings');
 const PackageTypes = require('./settings/packageTypes');
@@ -31,6 +32,7 @@ module.exports = {
   System,
   NotificationTypes,
   PackageTypes,
+  NotificationForTypes,
   VehicleTypes,
   PricingTypes,
   LogStatusTypes,
