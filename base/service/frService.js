@@ -283,6 +283,7 @@ const FrService = {
 
     if (
       settings.IsCourier &&
+      !settings.SkipCourierUpdate &&
       user.userType == Enums.UserTypes.Courier.value.Id
     ) {
       if (!body.courier_id) {
