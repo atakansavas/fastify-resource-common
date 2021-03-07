@@ -38,9 +38,12 @@ module.exports = class FrApi {
   }
 
   clearSchemas(schema) {
-    if (schema.properties._id) {
-      delete schema.properties._id;
+    if (schema.properties) {
+      if (schema.properties._id) {
+        delete schema.properties._id;
+      }
     }
+
     return schema;
   }
 
