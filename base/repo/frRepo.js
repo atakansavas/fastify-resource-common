@@ -15,6 +15,7 @@ const FrRepo = {
     } catch (err) {
       if (process.env.KEEPLOGS == 1) {
         console.error('DB INSERT ERROR :', err);
+        console.error('document: ', document);
       }
       throw new Error('DB Insert ERROR : ' + err);
     }
