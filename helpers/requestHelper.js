@@ -1,6 +1,7 @@
 const frError = require('../error/frError');
 const ErrorCodes = require('../error/errorCodes');
 const axios = require('axios');
+const utilities = require('./utilities');
 
 module.exports = class RequestHelper {
   constructor(token, _baseUrl) {
@@ -72,10 +73,11 @@ module.exports = class RequestHelper {
     });
   }
 
-  post(path, payload) {
+  post(path, payload, cleanObject = false) {
     if (process.env.KEEPLOGS == 1) {
       console.info('REQUEST => POST', this.baseUrl + path, payload);
     }
+    if (cleanObject) payload = utilities.cleanObject(payload);
     return new Promise((resolve, reject) => {
       this.service
         .post(this.baseUrl + path, payload)
@@ -90,10 +92,11 @@ module.exports = class RequestHelper {
     });
   }
 
-  update(path, payload) {
+  update(path, payload, cleanObject = false) {
     if (process.env.KEEPLOGS == 1) {
       console.info('REQUEST => PUT', this.baseUrl + path, payload);
     }
+    if (cleanObject) payload = utilities.cleanObject(payload);
     return new Promise((resolve, reject) => {
       this.service
         .put(this.baseUrl + path, payload)
