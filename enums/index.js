@@ -19,6 +19,7 @@ const OrderTypes = require('./order/orderTypes');
 const OrderInputTypes = require('./order/orderInputTypes');
 const OrderStatusTypes = require('./order/orderStatusTypes');
 const LogStatusTypes = require('./order/logStatusTypes');
+const PreOrderStatusTypes = require('./order/preOrderStatusTypes');
 
 const PromotionTypes = require('./payments/promotionTypes');
 const PaymentTypes = require('./payments/paymentTypes');
@@ -30,6 +31,7 @@ const PaymentForTypes = require('./payments/paymentForTypes');
 module.exports = {
   Groups,
   System,
+  PreOrderStatusTypes,
   NotificationTypes,
   PackageTypes,
   NotificationForTypes,
