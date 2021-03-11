@@ -40,4 +40,8 @@ module.exports = new Enum({
     Desc: 'Kurye almaktan vazgeçti.',
     OrderStatusId: 5,
   },
+  TransferAccepted: {
+    Id: 9,
+    Desc: 'Transfer kabul edildi.',
+  },
 });
