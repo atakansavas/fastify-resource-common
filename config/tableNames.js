@@ -21,6 +21,7 @@ const tableNames = {
   OrderLogsDb: 'orderlogs_db',
   RequestDb: 'request_db',
   NotificationsDb: 'notifications_db',
+  CourierLocationsDb: 'courier_locations_db',
 };
 
 module.exports = tableNames;
